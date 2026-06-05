@@ -1,0 +1,6 @@
+{
+  "name": "MySewa",
+  "description": "A secure rental dashboard and PropTech matching system aligned with UN SDG 9: Industry, Innovation, and Infrastructure.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

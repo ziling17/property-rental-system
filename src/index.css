@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+
+  --color-brand-primary: #004ac6;
+  --color-brand-blue-bg: #2563eb;
+  --color-brand-yellow: #ffe083;
+  --color-brand-dark: #121c2a;
+  --color-brand-dark-text: #434655;
+  --color-brand-light-blue: #eff4ff;
+  --color-brand-sdg9-bg: #d9e3f6;
+  --color-brand-border: #dee9fc;
+  --color-brand-surface: #f8f9ff;
+  --color-brand-surface-container-lowest: #ffffff;
+  --color-brand-surface-container-low: #eff4ff;
+  --color-brand-surface-container: #e6eeff;
+  --color-brand-surface-container-high: #dee9fc;
+  --color-brand-surface-container-highest: #d9e3f6;
+  --color-brand-on-surface: #121c2a;
+  --color-brand-on-surface-variant: #434655;
+  --color-brand-outline: #737686;
+  --color-brand-outline-variant: #c3c6d7;
+  --color-brand-on-primary: #ffffff;
+  --color-brand-primary-container: #2563eb;
+  --color-brand-on-primary-container: #eeefff;
+  --color-brand-tertiary-fixed: #ffe083;
+  --color-brand-on-tertiary-container: #4e3d00;
+  --color-brand-error: #ba1a1a;
+  --color-brand-error-container: #ffdad6;
+  --color-brand-on-background: #121c2a;
+  --color-brand-background: #f8f9ff;
+}
+
+@theme {
+  --color-primary: #004ac6;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2563eb;
+  --color-on-primary-container: #eeefff;
+
+  --color-background: #f8f9ff;
+  --color-on-background: #121c2a;
+
+  --color-surface: #f8f9ff;
+  --color-on-surface: #121c2a;
+  --color-on-surface-variant: #434655;
+
+  --color-surface-dim: #d0dbed;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e6eeff;
+  --color-surface-container-high: #dee9fc;
+  --color-surface-container-highest: #d9e3f6;
+
+  --color-outline: #737686;
+  --color-outline-variant: #c3c6d7;
+
+  --color-tertiary: #735c00;
+  --color-tertiary-container: #cea700;
+  --color-on-tertiary-container: #4e3d00;
+
+  --color-secondary: #5c5f60;
+  --color-secondary-container: #dee0e2;
+  --color-on-secondary-container: #606365;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.login-card-shadow {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.login-card-shadow:hover {
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.transition-soft {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@utility animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@utility animate-scaleIn {
+  animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
