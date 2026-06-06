@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Property } from "../types";
 import { MapPin, Bed, Bath, Maximize2, Sparkles, CheckCircle, Heart } from "lucide-react";
 import { motion } from "motion/react";
+import { useNavigate } from 'react-router-dom';
 
 interface PropertyCardProps {
   key?: string;
@@ -11,6 +12,7 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ property, onViewDetails }: PropertyCardProps) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   // Determine badge styles based on design system rules
   const renderBadge = () => {
@@ -32,7 +34,7 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -6 }}
@@ -52,9 +54,8 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
             e.stopPropagation();
             setIsFavorite(!isFavorite);
           }}
-          className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md shadow-sm transition-colors ${
-            isFavorite ? "bg-red-50 text-red-500 hover:bg-red-100" : "bg-white/80 text-[#737686] hover:bg-white"
-          }`}
+          className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md shadow-sm transition-colors ${isFavorite ? "bg-red-50 text-red-500 hover:bg-red-100" : "bg-white/80 text-[#737686] hover:bg-white"
+            }`}
         >
           <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
         </button>
@@ -83,7 +84,7 @@ export default function PropertyCard({ property, onViewDetails }: PropertyCardPr
             <span className="text-[11px] text-[#737686] font-medium uppercase tracking-wider">Per Month</span>
           </div>
           <button
-            onClick={() => onViewDetails(property)}
+            onClick={() => navigate(`/property/${property.id}`)}
             className="bg-blue-50 text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all shadow-sm active:scale-95 duration-100 cursor-pointer"
           >
             View Details

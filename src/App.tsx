@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomeDashboard from './pages/HomeDashboard';
 import PropertyListingPage from './pages/PropertyListingPage';
+import PropertyDetailPage from './pages/PropertyDetailPage';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/home" element={<HomeDashboard />} />
       <Route path="/properties" element={<PropertyListingPage />} />
+      <Route path="/property/:id" element={<PropertyDetailPage />} />
     </Routes>
   );
 }

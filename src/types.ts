@@ -102,3 +102,79 @@ export interface ChatMessage {
 }
 
 export type UserRole = 'tenant' | 'landlord';
+
+export interface Host {
+  name: string;
+  avatar: string;
+  joined: string;
+  superhost: boolean;
+  description: string;
+}
+
+export interface AmenityCategory {
+  category: string;
+  items: {
+    name: string;
+    iconName: string;
+  }[];
+}
+
+export interface NotIncludedItem {
+  name: string;
+  iconName: string;
+}
+
+export interface MatchFactor {
+  title: string;
+  desc: string;
+  type: "commute" | "sustainability" | "financial" | "community";
+}
+
+export interface DetailReview {
+  id: string;
+  name: string;
+  avatar: string;
+  date: string;
+  duration: string;
+  stars: number;
+  comment: string;
+}
+
+export interface CategoryRatings {
+  cleanliness: number;
+  accuracy: number;
+  communication: number;
+  checkIn: number;
+  location: number;
+  value: number;
+}
+
+export interface MatchingInputs {
+  klccCommuteMins: number;
+  prefersLeed: boolean;
+  monthlyIncome: number;
+  techIndustry: boolean;
+}
+
+export interface DetailProperty {
+  id: string;
+  name: string;
+  location: string;
+  verified: boolean;
+  monthlyRent: number;
+  bedrooms: string;
+  size: string;
+  deposit: number;
+  images: string[];
+  host: Host;
+  about: string[];
+  amenities: AmenityCategory[];
+  allAmenitiesCount: number;
+  notIncluded: NotIncludedItem[];
+  metrics: {
+    stability: number;
+    match: number;
+  };
+  categoryRatings: CategoryRatings;
+  reviews: DetailReview[];
+}

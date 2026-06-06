@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Property, Transaction } from '../types';
 import PropertyCard from '../components/PropertyListingCard';
 import PropertyDetailsModal from '../components/PropertyListingDetailModal';
+import { DETAIL_PROPERTIES } from '../detailData';
 import AICounselorPanel from '../components/AICounselorPanel';
 import AddPropertyModal from '../components/AddPropertyModal';
 import { useSearchParams } from 'react-router-dom';
@@ -62,9 +63,24 @@ export default function PropertyListingPage() {
     // Fetch properties and transactions from full-stack server
     const fetchData = async () => {
         setLoading(true);
-        // Use mock data instead of API
-        setProperties([]);
-        setTransactions([]);
+        // Map DetailProperties to match Property type
+        const mockProperties = DETAIL_PROPERTIES.map(p => ({
+            ...p,
+            title: p.name,
+            image: p.images[0],  // 加这行
+            details: p.about.join(' '),
+            state: p.location.split(',').pop()?.trim() || 'Malaysia',
+            type: 'Condo',
+            beds: p.bedrooms,
+            baths: '2',
+            sqft: p.size,
+            price: p.monthlyRent,
+            stabilityScore: p.metrics.stability,
+            landlordName: p.host.name,
+            landlordVerified: p.verified,
+            depositRequired: p.deposit,
+        }));
+        setProperties(mockProperties as any);
         setLoading(false);
     };
 

@@ -32,9 +32,7 @@ export default function LandingPage() {
   };
 
   const handleSearchKeywordInput = (keyword: string) => {
-    setSearchKeyword(keyword);
-    const listingsDiv = document.getElementById('properties-section');
-    listingsDiv?.scrollIntoView({ behavior: 'smooth' });
+    navigate(`/properties?search=${keyword}`);
   };
 
   useEffect(() => {
