@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import HomeDashboard from './pages/HomeDashboard';
 import PropertyListingPage from './pages/PropertyListingPage';
 import PropertyDetailPage from './pages/PropertyDetailPage';
+import SmartMatchPage from './pages/SmartMatchPage';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Route path="/home" element={<HomeDashboard />} />
       <Route path="/properties" element={<PropertyListingPage />} />
       <Route path="/property/:id" element={<PropertyDetailPage />} />
+      <Route path="/smartmatch" element={<SmartMatchPage />} />
     </Routes>
   );
 }

@@ -159,7 +159,7 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
             <div className="flex gap-4 pt-2 text-xs border-t border-white/20 text-slate-300">
               <span className="flex items-center gap-1 font-semibold">{property.bedrooms} Bed</span>
               <span className="flex items-center gap-1 font-semibold">{property.bathrooms} Bath</span>
-              <span className="flex items-center gap-1 font-semibold">{property.sqft.toLocaleString()} sqft</span>
+              <span className="flex items-center gap-1 font-semibold">{property.sqft?.toLocaleString()} sqft</span>
               <span className="ml-auto text-amber-400 font-bold text-base">RM {property.price}/mo</span>
             </div>
           </div>
@@ -226,7 +226,7 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="bg-slate-50 border border-outline-variant/30 rounded-xl p-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">
-                        {property.landlordName.charAt(0)}
+                        {property.landlordName?.charAt(0)}
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-slate-800">{property.landlordName}</p>
@@ -242,7 +242,7 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 <div className="space-y-2">
                   <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Property Features</h4>
                   <div className="flex flex-wrap gap-2">
-                    {property.features.map((feature, idx) => (
+                    {property.features?.map((feature, idx) => (
                       <span
                         key={idx}
                         className="bg-slate-100/80 text-slate-700 text-xs px-3 py-1.5 rounded-xl border border-outline-variant/20 font-medium hover:bg-slate-100"
@@ -288,12 +288,12 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-slate-700">Landlord Response & Escrow History</span>
-                      <span className="text-primary">{property.stabilityBreakdown.landlordRating}%</span>
+                      <span className="text-primary">{property.stabilityBreakdown?.landlordRating}%</span>
                     </div>
                     <div className="w-full h-3 bg-slate-100 border border-slate-200 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-blue-500 to-primary rounded-full transition-all duration-1000"
-                        style={{ width: `${property.stabilityBreakdown.landlordRating}%` }}
+                        style={{ width: `${property.stabilityBreakdown?.landlordRating}%` }}
                       />
                     </div>
                     <p className="text-[10px] text-slate-400">Response guarantees and deposit return speed indexes</p>
@@ -303,12 +303,12 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-slate-700">Legal Compliance & Strata Registration</span>
-                      <span className="text-primary">{property.stabilityBreakdown.legalCompliance}%</span>
+                      <span className="text-primary">{property.stabilityBreakdown?.legalCompliance}%</span>
                     </div>
                     <div className="w-full h-3 bg-slate-100 border border-slate-200 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-blue-500 to-primary rounded-full transition-all duration-1000"
-                        style={{ width: `${property.stabilityBreakdown.legalCompliance}%` }}
+                        style={{ width: `${property.stabilityBreakdown?.legalCompliance}%` }}
                       />
                     </div>
                     <p className="text-[10px] text-slate-400">Ownership matches, verified lease history, and strata board audits</p>
@@ -318,12 +318,12 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-slate-700">Protected Escrow Deposit Protection</span>
-                      <span className="text-primary">{property.stabilityBreakdown.depositSafety}%</span>
+                      <span className="text-primary">{property.stabilityBreakdown?.depositSafety}%</span>
                     </div>
                     <div className="w-full h-3 bg-slate-100 border border-slate-200 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-blue-500 to-primary rounded-full transition-all duration-1000"
-                        style={{ width: `${property.stabilityBreakdown.depositSafety}%` }}
+                        style={{ width: `${property.stabilityBreakdown?.depositSafety}%` }}
                       />
                     </div>
                     <p className="text-[10px] text-slate-400">Escrow backed guarantee holding protection status compliance</p>
@@ -333,12 +333,12 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-slate-700">Strata State & Building Maintenance Score</span>
-                      <span className="text-primary">{property.stabilityBreakdown.maintenanceScore}%</span>
+                      <span className="text-primary">{property.stabilityBreakdown?.maintenanceScore}%</span>
                     </div>
                     <div className="w-full h-3 bg-slate-100 border border-slate-200 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-blue-500 to-primary rounded-full transition-all duration-1000"
-                        style={{ width: `${property.stabilityBreakdown.maintenanceScore}%` }}
+                        style={{ width: `${property.stabilityBreakdown?.maintenanceScore}%` }}
                       />
                     </div>
                     <p className="text-[10px] text-slate-400">Building safety, lift operations quality, and plumbing audit records</p>
@@ -348,12 +348,12 @@ export const HomePropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs font-bold">
                       <span className="text-slate-700">SDG 9 Digital Connection & Regional Security</span>
-                      <span className="text-primary">{property.stabilityBreakdown.neighborhoodSafety}%</span>
+                      <span className="text-primary">{property.stabilityBreakdown?.neighborhoodSafety}%</span>
                     </div>
                     <div className="w-full h-3 bg-slate-100 border border-slate-200 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-blue-500 to-primary rounded-full transition-all duration-1000"
-                        style={{ width: `${property.stabilityBreakdown.neighborhoodSafety}%` }}
+                        style={{ width: `${property.stabilityBreakdown?.neighborhoodSafety}%` }}
                       />
                     </div>
                     <p className="text-[10px] text-slate-400">LRT accessibility, green indices, low local crime rate records</p>

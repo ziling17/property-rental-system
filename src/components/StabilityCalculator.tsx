@@ -20,7 +20,7 @@ export default function StabilityCalculator({ onCalculate, currentScore }: Stabi
 
   const calculateScore = () => {
     setIsCalculating(true);
-    
+
     setTimeout(() => {
       // Logic-driven calculation of reliability rating
       let baseScore = 75;
@@ -35,7 +35,7 @@ export default function StabilityCalculator({ onCalculate, currentScore }: Stabi
       if (inputs.employmentStatus === 'employed') baseScore += 5;
       else if (inputs.employmentStatus === 'retired') baseScore += 3;
       else if (inputs.employmentStatus === 'self-employed') baseScore += 2;
-      
+
       // 3. Rental History duration (Max +10)
       if (inputs.leaseDuration >= 24) baseScore += 10;
       else if (inputs.leaseDuration >= 12) baseScore += 7;
@@ -60,7 +60,7 @@ export default function StabilityCalculator({ onCalculate, currentScore }: Stabi
     <section className="py-20 bg-white border-t border-brand-border/40" id="stability-calculator-section">
       <div className="max-w-7xl mx-auto px-6 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Static Info Block */}
           <div className="lg:col-span-5 space-y-6">
             <div className="inline-flex items-center gap-1.5 bg-brand-light-blue py-1.5 px-3.5 rounded-full border border-brand-border/80">
@@ -69,11 +69,11 @@ export default function StabilityCalculator({ onCalculate, currentScore }: Stabi
                 Platform Verification Core
               </span>
             </div>
-            
+
             <h2 className="text-3xl font-extrabold text-brand-dark tracking-tight leading-tight">
               Test Your <span className="text-brand-primary">Stability Score</span> In Real Time
             </h2>
-            
+
             <p className="text-base text-brand-dark-text leading-relaxed">
               Our unique Stability Scoring reduces the need for expensive upfront security deposits. By calculating and validating your lease fidelity metrics, we provide landlords with a robust measure of trust.
             </p>
@@ -112,7 +112,7 @@ export default function StabilityCalculator({ onCalculate, currentScore }: Stabi
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                
+
                 {/* Employment Status */}
                 <div className="space-y-1.5">
                   <span className="text-xs font-bold text-brand-dark uppercase tracking-wider flex items-center gap-1.5">

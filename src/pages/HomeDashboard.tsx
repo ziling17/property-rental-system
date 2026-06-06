@@ -61,7 +61,7 @@ export default function HomeDashboard() {
     // User auth state
     const [user, setUser] = useState<{ name: string; email: string; loggedIn: boolean } | null>(() => {
         const saved = localStorage.getItem('mysewa_user');
-        return saved ? JSON.parse(saved) : { name: 'Ding Ziling', email: 'dingziling88@gmail.com', loggedIn: true };
+        return saved ? JSON.parse(saved) : { name: 'Ding Zi Ling', email: 'dingziling88@gmail.com', loggedIn: true };
     });
 
     // Active filters setup

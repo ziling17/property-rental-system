@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { Building2, User, LogIn, Menu, X, CheckSquare } from 'lucide-react';
+
 
 interface HeaderProps {
   mode?: 'main' | 'auth';
@@ -21,6 +22,8 @@ export default function Header({
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isDetailOrMatch = location.pathname.startsWith('/property') || location.pathname === '/smartmatch';
 
   return (
 
@@ -97,6 +100,32 @@ export default function Header({
           </div>
         )}
 
+        {isDetailOrMatch && (
+          <div className="hidden md:flex items-center gap-8">
+            <button
+              onClick={() => {
+                const lastId = localStorage.getItem('last_property_id');
+                navigate(lastId ? `/property/${lastId}` : '/properties');
+              }}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname.startsWith('/property')
+                  ? 'text-brand-primary border-brand-primary'
+                  : 'text-brand-dark-text border-transparent hover:text-brand-primary'
+                }`}
+            >
+              Properties Details
+            </button>
+            <button
+              onClick={() => navigate('/smartmatch')}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname === '/smartmatch'
+                ? 'text-brand-primary border-brand-primary'
+                : 'text-brand-dark-text border-transparent hover:text-brand-primary'
+                }`}
+            >
+              AI Smart Match
+            </button>
+          </div>
+        )}
+
         {/* Action Buttons / Profile */}
         <div className="hidden md:flex items-center gap-4">
           {userProfile ? (
@@ -118,7 +147,7 @@ export default function Header({
                 title={userProfile.name}
                 id="logout-btn"
               >
-                {userProfile.name.split(' ').map(n => n[0]).join('')}
+                {userProfile.name.split(' ').map((n: string) => n[0]).join('')}
               </button>
             </div>
           ) : (
@@ -202,7 +231,7 @@ export default function Header({
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center font-bold text-xs">
-                    {userProfile.name.split(' ').map(n => n[0]).join('')}
+                    {userProfile.name.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
                     <p className="text-sm font-bold text-brand-dark">{userProfile.name}</p>

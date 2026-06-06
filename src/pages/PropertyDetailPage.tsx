@@ -1,4 +1,3 @@
-import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -9,6 +8,7 @@ import MatchConfigurator from "../components/MatchConfigurator";
 import BookingCard from "../components/BookingCard";
 import LucideIcon from "../components/LucideIcon";
 import { DETAIL_PROPERTIES } from "../detailData";
+import React, { useState, useMemo, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { DetailProperty, MatchingInputs, CategoryRatings, DetailReview } from "../types";
 
@@ -16,6 +16,11 @@ export default function PropertyDetailPage() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [activePropertyId, setActivePropertyId] = useState<string>(id || "skyline-penthouse");
+    useEffect(() => {
+        if (id) {
+            localStorage.setItem('last_property_id', id);
+        }
+    }, [id]);
     const [properties, setProperties] = useState<DetailProperty[]>(DETAIL_PROPERTIES);
     const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
     const [matchingInputs, setMatchingInputs] = useState<MatchingInputs>({
