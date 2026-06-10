@@ -9,10 +9,8 @@ import { useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
-import {
-    Building, Search, Filter, RefreshCw, Plus, Shield, MessageSquare,
-    HelpCircle, Sparkles, BookOpen, User, Check, X, Bell
-} from "lucide-react";
+import {Building, Search, Filter, RefreshCw, Plus, Shield, MessageSquare,
+    HelpCircle, Sparkles, BookOpen, User, Check, X, Bell} from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export default function PropertyListingPage() {

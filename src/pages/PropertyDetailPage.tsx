@@ -111,6 +111,13 @@ export default function PropertyDetailPage() {
             />
 
             <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1">
+                <button
+                    onClick={() => navigate('/properties')}
+                    className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-brand-primary transition-colors mb-6 cursor-pointer"
+                >
+                    <LucideIcon name="ArrowLeft" size={16} />
+                    <span>Back to Properties</span>
+                </button>
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                     <div className="space-y-1.5 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
@@ -129,6 +136,14 @@ export default function PropertyDetailPage() {
                                 <LucideIcon name="MapPin" size={16} className="text-gray-400" />
                                 <span className="font-medium text-gray-600">{activeProperty.location}</span>
                             </div>
+                            <button
+                                id="btn-trigger-map"
+                                onClick={() => navigate('/map')} // <-- Changed from setShowMapModal(true)
+                                className="flex items-center gap-1 text-blue-600 font-bold hover:underline"
+                            >
+                                <LucideIcon name="Map" size={14} />
+                                <span>View Map</span>
+                            </button>
                         </div>
                     </div>
                     <button

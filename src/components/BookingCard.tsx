@@ -5,6 +5,7 @@
 
 import React, { useState, useMemo } from "react";
 import { Property, MatchingInputs } from "../types";
+import { useNavigate } from 'react-router-dom';
 import LucideIcon from "./LucideIcon";
 
 interface BookingCardProps {
@@ -13,6 +14,7 @@ interface BookingCardProps {
 }
 
 export default function BookingCard({ property, matchingInputs }: BookingCardProps) {
+  const navigate = useNavigate();
   const [checkInDate, setCheckInDate] = useState("2026-06-15");
   const [checkOutDate, setCheckOutDate] = useState("2026-07-15");
   const [bookingSuccess, setBookingSuccess] = useState(false);
@@ -50,10 +52,10 @@ export default function BookingCard({ property, matchingInputs }: BookingCardPro
     const start = new Date(checkInDate);
     const end = new Date(checkOutDate);
     if (isNaN(start.getTime()) || isNaN(end.getTime())) return 30;
-    
+
     const diffTime = end.getTime() - start.getTime();
     if (diffTime <= 0) return 0;
-    
+
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }, [checkInDate, checkOutDate]);
 
@@ -76,7 +78,17 @@ export default function BookingCard({ property, matchingInputs }: BookingCardPro
       alert("Please select valid future dates where Check-out is after Check-in.");
       return;
     }
-    setShowCheckoutDrawer(true);
+    navigate(`/booking/${property.id}`, {
+      state: {
+        checkInDate,
+        checkOutDate,
+        totalDue,
+        firstMonthRent,
+        securityDeposit,
+        utilityDeposit,
+        daysCount,
+      }
+    });
   };
 
   const handleExecuteContract = (e: React.FormEvent) => {
@@ -417,22 +429,20 @@ export default function BookingCard({ property, matchingInputs }: BookingCardPro
                   <button
                     type="button"
                     onClick={() => setTourMode("physical")}
-                    className={`py-1.5 rounded-md text-xs font-bold transition-all ${
-                      tourMode === "physical"
-                        ? "bg-white text-blue-600 shadow-xs"
-                        : "text-gray-500 hover:text-gray-800"
-                    }`}
+                    className={`py-1.5 rounded-md text-xs font-bold transition-all ${tourMode === "physical"
+                      ? "bg-white text-blue-600 shadow-xs"
+                      : "text-gray-500 hover:text-gray-800"
+                      }`}
                   >
                     Physical Visit
                   </button>
                   <button
                     type="button"
                     onClick={() => setTourMode("virtual")}
-                    className={`py-1.5 rounded-md text-xs font-bold transition-all ${
-                      tourMode === "virtual"
-                        ? "bg-white text-blue-600 shadow-xs"
-                        : "text-gray-500 hover:text-gray-800"
-                    }`}
+                    className={`py-1.5 rounded-md text-xs font-bold transition-all ${tourMode === "virtual"
+                      ? "bg-white text-blue-600 shadow-xs"
+                      : "text-gray-500 hover:text-gray-800"
+                      }`}
                   >
                     Virtual Videocall
                   </button>

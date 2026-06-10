@@ -6,6 +6,9 @@ import HomeDashboard from './pages/HomeDashboard';
 import PropertyListingPage from './pages/PropertyListingPage';
 import PropertyDetailPage from './pages/PropertyDetailPage';
 import SmartMatchPage from './pages/SmartMatchPage';
+import PaymentPage from './pages/PaymentPage';
+import BookingPage from './pages/BookingPage';
+import MapPage from './pages/MapPage';
 
 export default function App() {
   return (
@@ -17,6 +20,9 @@ export default function App() {
       <Route path="/properties" element={<PropertyListingPage />} />
       <Route path="/property/:id" element={<PropertyDetailPage />} />
       <Route path="/smartmatch" element={<SmartMatchPage />} />
+      <Route path="/payment" element={<PaymentPage />} />
+      <Route path="/booking/:id" element={<BookingPage />} />
+      <Route path="/map" element={<MapPage />} />
     </Routes>
   );
 }

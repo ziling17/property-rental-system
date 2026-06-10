@@ -178,3 +178,41 @@ export interface DetailProperty {
   categoryRatings: CategoryRatings;
   reviews: DetailReview[];
 }
+
+export interface BookingSummary {
+  startDate: string;
+  endDate: string;
+  durationMonths: number;
+  isValid: boolean;
+  warnings: string[];
+  firstMonthRent: number;
+  securityDeposit: number;
+  utilityDeposit: number;
+  totalPayment: number;
+}
+
+export interface BookingProperty {
+  id: string;
+  name: string;
+  rating: number;
+  location: string;
+  beds: number;
+  baths: number;
+  sqft: number;
+  imageUrl: string;
+  monthlyRent: number;
+  securityDeposit: number;
+  utilityDeposit: number;
+}
+
+export interface BookingSummary {
+  startDate: string;
+  endDate: string;
+  durationMonths: number;
+  isValid: boolean;
+  warnings: string[];
+  firstMonthRent: number;
+  securityDeposit: number;
+  utilityDeposit: number;
+  totalPayment: number;
+}
