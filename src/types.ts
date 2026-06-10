@@ -216,3 +216,100 @@ export interface BookingSummary {
   utilityDeposit: number;
   totalPayment: number;
 }
+
+export type EscrowStatus = 'Held' | 'Released' | 'Refunded' | 'Pending';
+export type BookingStatus = 'Active' | 'Completed' | 'Cancelled' | 'Scheduled';
+
+export interface RentalProperty {
+  id: string;
+  title: string;
+  address: string;
+  city: string;
+  description: string;
+  rent: number;
+  deposit: number;
+  imgUrl: string;
+  rating: number;
+  reviewsCount: number;
+  landlordName: string;
+  landlordEmail: string;
+  landlordPhone: string;
+  amenities: string[];
+  sdgAligned: boolean;
+}
+
+export interface RentalBooking {
+  id: string;
+  propertyId: string;
+  propertyTitle: string;
+  propertyAddress: string;
+  propertyImgUrl: string;
+  startDate: string;
+  endDate: string;
+  duration: string;
+  rent: number;
+  depositAmt: number;
+  status: BookingStatus;
+  escrowStatus: EscrowStatus;
+  rating?: number;
+  reviewText?: string;
+  reviewDate?: string;
+  landlordName: string;
+  landlordEmail: string;
+  refundDate?: string;
+  escrowVerifiedId: string;
+}
+
+// Landlord Dashboard Types
+export type PropertyStatus = 'Vacant' | 'Occupied' | 'Maintenance';
+export type PropertyTypeValue = 'Condominium' | 'Landed House' | 'Apartment' | 'Studio' | 'Townhouse' | 'Duplex';
+
+export interface MaintenanceIssue {
+  id: string;
+  title: string;
+  status: 'Pending' | 'In Progress' | 'Resolved';
+  date: string;
+  priority: 'Low' | 'Medium' | 'High';
+}
+
+export interface LeaseInfo {
+  tenantName: string;
+  tenantEmail: string;
+  tenantPhone: string;
+  startDate: string;
+  endDate: string;
+  depositAmount: number;
+  autoRenew: boolean;
+  status: 'Active' | 'Expired' | 'Terminated';
+}
+
+export interface LandlordProperty {
+  id: string;
+  name: string;
+  unit: string;
+  neighborhood: string;
+  city: string;
+  monthlyRent: number;
+  status: PropertyStatus;
+  beds: number;
+  baths: number;
+  sqft: number;
+  propertyType: PropertyTypeValue;
+  imageUrl: string;
+  description: string;
+  lease?: LeaseInfo;
+  maintenanceIssues: MaintenanceIssue[];
+}
+
+export interface PaymentTransaction {
+  id: string;
+  propertyId: string;
+  propertyName: string;
+  tenantName: string;
+  amount: number;
+  dueDate: string;
+  paidDate?: string;
+  status: 'Paid' | 'Pending' | 'Overdue';
+  paymentMethod?: string;
+  invoiceNo: string;
+}

@@ -9,6 +9,9 @@ import SmartMatchPage from './pages/SmartMatchPage';
 import PaymentPage from './pages/PaymentPage';
 import BookingPage from './pages/BookingPage';
 import MapPage from './pages/MapPage';
+import TenantDashboard from './pages/TenantDashboard';
+import RentalHistory from './pages/RentalHistory';
+import LandlordDashboard from './pages/LandlordDashboard';
 
 export default function App() {
   return (
@@ -23,6 +26,9 @@ export default function App() {
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/booking/:id" element={<BookingPage />} />
       <Route path="/map" element={<MapPage />} />
+      <Route path="/tenant-dashboard" element={<TenantDashboard />} />
+      <Route path="/rental-history" element={<RentalHistory />} />
+      <Route path="/landlord-dashboard" element={<LandlordDashboard />} />
     </Routes>
   );
 }

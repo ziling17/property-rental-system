@@ -1,44 +1,54 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Building2, User, LogIn, Menu, X, CheckSquare } from 'lucide-react';
-
+import { Building2, Menu, X, CheckSquare } from 'lucide-react';
 
 interface HeaderProps {
-  mode?: 'main' | 'auth';
   onNavigate: (section: string) => void;
   activeSection: string;
-  userProfile: any;
-  onOpenAuth: any;
-  onLogout: any;
+  userProfile: {
+    name: string;
+    role: 'tenant' | 'landlord';
+    score?: number;
+  } | null;
 }
 
 export default function Header({
-  mode = 'main',
   onNavigate,
   activeSection,
-  userProfile,
-  onOpenAuth,
-  onLogout
+  userProfile
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Dynamic Route Conditions
+  const isLandingPage = location.pathname === '/' || location.pathname === '/home';
+  const isDashboardPage = location.pathname === '/tenant-dashboard' || location.pathname === '/rental-history';
   const isDetailOrMatch = location.pathname.startsWith('/property') || location.pathname === '/smartmatch';
 
-  return (
+  const handleLogoClick = () => {
+    if (userProfile) {
+      navigate('/home');
+    } else {
+      navigate('/');
+    }
+  };
 
-    <header className="bg-white/95 sticky top-0 z-45 border-b border-brand-border/60 backdrop-blur-md shadow-sm transition-all duration-300">
+  const handleProfileClick = () => {
+    if (userProfile?.role === 'landlord') {
+      navigate('/landlord-dashboard'); // Fallback structure for Landlords
+    } else {
+      navigate('/tenant-dashboard');   // Default workspace target
+    }
+  };
+
+  return (
+    <header className="bg-white/95 sticky top-0 z-50 border-b border-brand-border/60 backdrop-blur-md shadow-sm transition-all duration-300">
       <nav className="flex justify-between items-center px-6 md:px-16 h-16 w-full max-w-7xl mx-auto">
+
         {/* Logo */}
         <div
-          onClick={() => {
-            const session = localStorage.getItem('mysewa_session');
-            if (session) {
-              navigate('/home');
-            } else {
-              navigate('/');
-            }
-          }}
+          onClick={handleLogoClick}
           className="flex items-center gap-2 cursor-pointer group"
           id="mysewa-logo"
         >
@@ -50,49 +60,30 @@ export default function Header({
           </span>
         </div>
 
-        {/* Desktop Nav */}
-        {mode === 'main' && (
+        {/* ========================================================= */}
+        {/* DESKTOP NAVIGATION CONTENT                                 */}
+        {/* ========================================================= */}
+
+        {/* 1. Landing Page Navigation (3 items) */}
+        {isLandingPage && (
           <div className="hidden md:flex items-center gap-8">
             <button
-              onClick={() => {
-                onNavigate('properties');
-                const el = document.getElementById('properties-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'properties'
-                ? 'text-brand-primary border-brand-primary'
-                : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'
-                }`}
+              onClick={() => { onNavigate('properties'); document.getElementById('properties-section')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'properties' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
               id="nav-search-properties"
             >
               Search Properties
             </button>
-
             <button
-              onClick={() => {
-                onNavigate('calculator');
-                const el = document.getElementById('stability-calculator-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'calculator'
-                ? 'text-brand-primary border-brand-primary'
-                : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'
-                }`}
+              onClick={() => { onNavigate('calculator'); document.getElementById('stability-calculator-section')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'calculator' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
               id="nav-stability-calculator"
             >
               Calculate Stability
             </button>
-
             <button
-              onClick={() => {
-                onNavigate('wizard');
-                const el = document.getElementById('match-wizard-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'wizard'
-                ? 'text-brand-primary border-brand-primary'
-                : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'
-                }`}
+              onClick={() => { onNavigate('wizard'); document.getElementById('match-wizard-section')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'wizard' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
               id="nav-smart-matching"
             >
               Smart Matching
@@ -100,6 +91,25 @@ export default function Header({
           </div>
         )}
 
+        {/* 2. Tenant Dashboard Navigation (2 items) */}
+        {isDashboardPage && (
+          <div className="hidden md:flex items-center gap-8">
+            <button
+              onClick={() => navigate('/tenant-dashboard')}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname === '/tenant-dashboard' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => navigate('/rental-history')}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname === '/rental-history' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
+            >
+              Rental History
+            </button>
+          </div>
+        )}
+
+        {/* 3. Detail or Match Navigation */}
         {isDetailOrMatch && (
           <div className="hidden md:flex items-center gap-8">
             <button
@@ -107,50 +117,54 @@ export default function Header({
                 const lastId = localStorage.getItem('last_property_id');
                 navigate(lastId ? `/property/${lastId}` : '/properties');
               }}
-              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname.startsWith('/property')
-                  ? 'text-brand-primary border-brand-primary'
-                  : 'text-brand-dark-text border-transparent hover:text-brand-primary'
-                }`}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname.startsWith('/property') ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary'}`}
             >
               Properties Details
             </button>
             <button
               onClick={() => navigate('/smartmatch')}
-              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname === '/smartmatch'
-                ? 'text-brand-primary border-brand-primary'
-                : 'text-brand-dark-text border-transparent hover:text-brand-primary'
-                }`}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${location.pathname === '/smartmatch' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary'}`}
             >
               AI Smart Match
             </button>
           </div>
         )}
 
-        {/* Action Buttons / Profile */}
+        {/* ========================================================= */}
+        {/* RIGHT ACTION CORNER                                       */}
+        {/* ========================================================= */}
         <div className="hidden md:flex items-center gap-4">
           {userProfile ? (
-            <div className="flex items-center gap-3 bg-brand-light-blue py-1.5 pl-3 pr-2.5 rounded-full border border-brand-border/80">
+            /* AFTER LOGIN: Renders profile dashboard redirect context block */
+            <div
+              onClick={handleProfileClick}
+              className="flex items-center gap-3 bg-brand-light-blue py-1.5 pl-3 pr-2.5 rounded-full border border-brand-border/80 cursor-pointer hover:bg-brand-primary/5 hover:border-brand-primary/30 transition-all duration-200 group animate-fade-in"
+              title="Go to Dashboard"
+            >
               <div className="flex flex-col text-right">
-                <span className="text-xs font-bold text-brand-dark tracking-tight">{userProfile.name}</span>
+                <span className="text-xs font-bold text-brand-dark tracking-tight group-hover:text-brand-primary transition-colors">
+                  {userProfile.name}
+                </span>
                 {userProfile.role === 'tenant' ? (
                   <span className="text-[10px] text-brand-primary font-bold flex items-center justify-end gap-0.5">
                     <CheckSquare className="w-2.5 h-2.5 text-brand-primary fill-brand-primary/20" />
-                    Verified Score: {userProfile.score}%
+                    Verified Score: {userProfile.score || 0}%
                   </span>
                 ) : (
-                  <span className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">Verified Landlord</span>
+                  <span className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">
+                    Verified Landlord
+                  </span>
                 )}
               </div>
-              <button
-                onClick={() => onOpenAuth(null)}
-                className="w-8 h-8 rounded-full bg-brand-primary/10 hover:bg-brand-primary/20 text-brand-primary flex items-center justify-center transition-all cursor-pointer font-semibold text-xs"
-                title={userProfile.name}
-                id="logout-btn"
+              <div
+                className="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-semibold text-xs shadow-sm group-hover:scale-105 transition-transform"
+                id="user-dashboard-avatar"
               >
                 {userProfile.name.split(' ').map((n: string) => n[0]).join('')}
-              </button>
+              </div>
             </div>
           ) : (
+            /* BEFORE LOGIN ONLY: Hides entirely once authenticated */
             <>
               <button
                 onClick={() => navigate('/login')}
@@ -170,10 +184,14 @@ export default function Header({
           )}
         </div>
 
-        {/* Mobile menu trigger */}
+        {/* Mobile menu avatar/trigger */}
         <div className="md:hidden flex items-center gap-3">
           {userProfile && (
-            <div className="text-xs font-bold bg-brand-light-blue px-3 py-1.5 rounded-full border border-brand-border/60">
+            <div
+              onClick={handleProfileClick}
+              className="text-xs font-bold bg-brand-light-blue text-brand-primary px-3 py-1.5 rounded-full border border-brand-border/60 cursor-pointer active:scale-95 transition-transform"
+              title="Go to Dashboard"
+            >
               {userProfile.name.split(' ')[0]}
             </div>
           )}
@@ -187,69 +205,98 @@ export default function Header({
         </div>
       </nav>
 
-      {/* Mobile nav content */}
+      {/* ========================================================= */}
+      {/* MOBILE NAVIGATION DRAWERS                                 */}
+      {/* ========================================================= */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-brand-border/50 py-4 px-6 animate-fade-in shadow-inner">
           <div className="flex flex-col gap-4">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                const el = document.getElementById('properties-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
-              id="mobile-nav-search"
-            >
-              Search Properties
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                const el = document.getElementById('match-wizard-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
-              id="mobile-nav-wizard"
-            >
-              Smart Matching Wizard
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                const el = document.getElementById('stability-calculator-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
-              id="mobile-nav-calculator"
-            >
-              Calculate Stability Score
-            </button>
+
+            {/* Mobile Landing Page items */}
+            {isLandingPage && (
+              <>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); document.getElementById('properties-section')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  Search Properties
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); document.getElementById('match-wizard-section')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  Smart Matching Wizard
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); document.getElementById('stability-calculator-section')?.scrollIntoView({ behavior: 'smooth' }); }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  Calculate Stability Score
+                </button>
+              </>
+            )}
+
+            {/* Mobile Dashboard items */}
+            {isDashboardPage && (
+              <>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); navigate('/tenant-dashboard'); }}
+                  className={`text-left font-bold py-1 ${location.pathname === '/tenant-dashboard' ? 'text-brand-primary' : 'text-brand-dark'}`}
+                >
+                  Dashboard
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); navigate('/rental-history'); }}
+                  className={`text-left font-bold py-1 ${location.pathname === '/rental-history' ? 'text-brand-primary' : 'text-brand-dark'}`}
+                >
+                  Rental History
+                </button>
+              </>
+            )}
+
+            {/* Mobile Property details items */}
+            {isDetailOrMatch && (
+              <>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    const lastId = localStorage.getItem('last_property_id');
+                    navigate(lastId ? `/property/${lastId}` : '/properties');
+                  }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  Properties Details
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); navigate('/smartmatch'); }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  AI Smart Match
+                </button>
+              </>
+            )}
 
             <hr className="border-brand-border/50" />
 
+            {/* Mobile Auth Management Footer */}
             {userProfile ? (
+              /* AFTER LOGIN: Only show profile link card, absolutely no log out choices */
               <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center font-bold text-xs">
+                <div
+                  onClick={() => { setMobileMenuOpen(false); handleProfileClick(); }}
+                  className="flex items-center gap-2.5 p-1 rounded-lg hover:bg-brand-light-blue cursor-pointer transition-colors"
+                >
+                  <div className="w-9 h-9 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-sm">
                     {userProfile.name.split(' ').map((n: string) => n[0]).join('')}
                   </div>
                   <div>
                     <p className="text-sm font-bold text-brand-dark">{userProfile.name}</p>
-                    <p className="text-xs text-brand-dark-text">Role: {userProfile.role}</p>
+                    <p className="text-xs text-brand-primary font-semibold">View My Dashboard →</p>
                   </div>
                 </div>
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onLogout();
-                  }}
-                  className="w-full bg-brand-light-blue text-brand-primary font-bold text-sm px-4 py-2.5 rounded-lg text-center"
-                  id="mobile-logout-btn"
-                >
-                  Logout
-                </button>
               </div>
             ) : (
+              /* BEFORE LOGIN: Fallback registration block buttons */
               <div className="flex flex-col gap-2.5">
                 <button
                   onClick={() => { setMobileMenuOpen(false); navigate('/login'); }}

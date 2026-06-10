@@ -17,7 +17,7 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  
+
   // Feedbacks
   const [errorStatus, setErrorStatus] = useState<string | null>(null);
   const [oauthLoading, setOauthLoading] = useState<string | null>(null);
@@ -69,7 +69,7 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
       role: role,
       name: name
     };
-
+    localStorage.setItem("userProfile", JSON.stringify(session));
     onLoginSuccess(session);
   };
 
@@ -93,7 +93,7 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
     <div id="login-container-wrapper" className="w-full max-w-[480px] space-y-6">
       {/* Login Card */}
       <div id="login-card" className="bg-surface-container-lowest rounded-2xl login-card-shadow p-6 md:p-10 transition-soft border border-surface-container-high relative overflow-hidden">
-        
+
         {/* Decorative ambient background inside card */}
         <div id="login-card-glow" className="absolute -top-10 -right-10 w-32 h-32 bg-primary/3 rounded-full blur-xl pointer-events-none" />
 
@@ -111,11 +111,10 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
           <button
             type="button"
             onClick={() => { setRole('tenant'); setErrorStatus(null); }}
-            className={`py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              role === 'tenant'
+            className={`py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${role === 'tenant'
                 ? 'bg-white text-primary shadow-xs'
                 : 'text-on-surface-variant hover:text-on-surface'
-            }`}
+              }`}
             id="tenantTab"
           >
             Tenant
@@ -123,11 +122,10 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
           <button
             type="button"
             onClick={() => { setRole('landlord'); setErrorStatus(null); }}
-            className={`py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              role === 'landlord'
+            className={`py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${role === 'landlord'
                 ? 'bg-white text-primary shadow-xs'
                 : 'text-on-surface-variant hover:text-on-surface'
-            }`}
+              }`}
             id="landlordTab"
           >
             Landlord
@@ -213,9 +211,9 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
               <label htmlFor="login-password-input" className="text-xs font-semibold text-on-surface-variant">
                 Password
               </label>
-              <a 
-                onClick={(e) => { e.preventDefault(); setErrorStatus('To recover password, click the Quick Demo Logan buttons to login instantly!'); }} 
-                className="text-xs font-semibold text-primary hover:underline cursor-pointer" 
+              <a
+                onClick={(e) => { e.preventDefault(); setErrorStatus('To recover password, click the Quick Demo Logan buttons to login instantly!'); }}
+                className="text-xs font-semibold text-primary hover:underline cursor-pointer"
                 href="#forgot"
                 id="login-forgot-password-link"
               >
@@ -297,9 +295,9 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
       {/* Footer Link */}
       <p className="text-center text-xs text-on-surface-variant">
         Don't have an account?{' '}
-        <a 
-          onClick={(e) => { e.preventDefault(); onRegisterClick(); }} 
-          className="text-primary font-semibold hover:underline cursor-pointer" 
+        <a
+          onClick={(e) => { e.preventDefault(); onRegisterClick(); }}
+          className="text-primary font-semibold hover:underline cursor-pointer"
           href="#register"
           id="login-create-account-link"
         >
