@@ -60,6 +60,11 @@ export default function PropertyDetailPage() {
         setMatchingInputs((prev) => ({ ...prev, ...updated }));
     };
 
+    const handleBookNow = () => {
+        sessionStorage.setItem('redirect_after_login', `/property/${activeProperty.id}`);
+        navigate('/login');
+    };
+
     const handleAddReview = (newReview: DetailReview, updatedRatings: CategoryRatings) => {
         setProperties((prevProps) => {
             return prevProps.map((p) => {
@@ -223,7 +228,11 @@ export default function PropertyDetailPage() {
                     </div>
 
                     <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
-                        <BookingCard property={activeProperty} matchingInputs={matchingInputs} />
+                        <BookingCard
+                            property={activeProperty}
+                            matchingInputs={matchingInputs}
+                            onBookNow={!userProfile ? handleBookNow : undefined}
+                        />
                     </div>
                 </div>
             </main>

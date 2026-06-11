@@ -59,9 +59,9 @@ export default function HomeDashboard() {
     });
 
     // User auth state
-    const [user, setUser] = useState<{ name: string; email: string; loggedIn: boolean } | null>(() => {
-        const saved = localStorage.getItem('mysewa_user');
-        return saved ? JSON.parse(saved) : { name: 'Ding Zi Ling', email: 'dingziling88@gmail.com', loggedIn: true };
+    const [user, setUser] = useState(() => {
+        const saved = localStorage.getItem('mysewa_session');
+        return saved ? JSON.parse(saved) : null;
     });
 
     // Active filters setup
@@ -284,15 +284,10 @@ export default function HomeDashboard() {
             </div>
 
             <Header
-                mode="auth"
-                onNavigate={() => navigate('/')}
+                onNavigate={() => { }}
                 activeSection=""
-                userProfile={user ? { name: user.name, score: 0, role: 'tenant' } : null}
-                onOpenAuth={() => navigate('/login')}
-                onLogout={() => {
-                    setUser(null);
-                    localStorage.removeItem('mysewa_session');
-                }}
+                userProfile={user ? { name: user.name, score: 0, role: user.role } : null}
+                showRegister={false}
             />
 
             <main className="flex-grow w-full max-w-7xl mx-auto px-4 md:px-16 py-6 space-y-16">

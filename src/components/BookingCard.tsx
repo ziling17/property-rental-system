@@ -11,9 +11,10 @@ import LucideIcon from "./LucideIcon";
 interface BookingCardProps {
   property: Property;
   matchingInputs: MatchingInputs;
+  onBookNow?: () => void;
 }
 
-export default function BookingCard({ property, matchingInputs }: BookingCardProps) {
+export default function BookingCard({ property, matchingInputs, onBookNow }: BookingCardProps) {
   const navigate = useNavigate();
   const [checkInDate, setCheckInDate] = useState("2026-06-15");
   const [checkOutDate, setCheckOutDate] = useState("2026-07-15");
@@ -78,16 +79,12 @@ export default function BookingCard({ property, matchingInputs }: BookingCardPro
       alert("Please select valid future dates where Check-out is after Check-in.");
       return;
     }
+    if (onBookNow) {
+      onBookNow();
+      return;
+    }
     navigate(`/booking/${property.id}`, {
-      state: {
-        checkInDate,
-        checkOutDate,
-        totalDue,
-        firstMonthRent,
-        securityDeposit,
-        utilityDeposit,
-        daysCount,
-      }
+      state: { checkInDate, checkOutDate, totalDue, firstMonthRent, securityDeposit, utilityDeposit, daysCount }
     });
   };
 

@@ -5,6 +5,8 @@ import { Building2, Menu, X, CheckSquare } from 'lucide-react';
 interface HeaderProps {
   onNavigate: (section: string) => void;
   activeSection: string;
+  showRegister?: boolean;
+  setCurrentTab?: (tab: string) => void;
   userProfile: {
     name: string;
     role: 'tenant' | 'landlord';
@@ -15,16 +17,19 @@ interface HeaderProps {
 export default function Header({
   onNavigate,
   activeSection,
-  userProfile
+  userProfile,
+  showRegister = true,
+  setCurrentTab,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   // Dynamic Route Conditions
-  const isLandingPage = location.pathname === '/' || location.pathname === '/home';
+  const isLandingPage = location.pathname === '/';
   const isDashboardPage = location.pathname === '/tenant-dashboard' || location.pathname === '/rental-history';
   const isDetailOrMatch = location.pathname.startsWith('/property') || location.pathname === '/smartmatch';
+  const isLandlordDashboard = location.pathname === '/landlord-dashboard';
 
   const handleLogoClick = () => {
     if (userProfile) {
@@ -130,6 +135,23 @@ export default function Header({
           </div>
         )}
 
+        {isLandlordDashboard && (
+          <div className="hidden md:flex items-center gap-8">
+            <button
+              onClick={() => setCurrentTab?.('dashboard')}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'dashboard' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setCurrentTab?.('properties')}
+              className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'properties' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
+            >
+              Properties
+            </button>
+          </div>
+        )}
+
         {/* ========================================================= */}
         {/* RIGHT ACTION CORNER                                       */}
         {/* ========================================================= */}
@@ -170,16 +192,13 @@ export default function Header({
                 onClick={() => navigate('/login')}
                 className="text-brand-primary font-semibold text-sm px-4 py-2 hover:bg-brand-light-blue rounded-lg transition-all cursor-pointer"
                 id="header-login-btn"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => navigate('/register')}
-                className="bg-brand-primary text-white font-semibold text-sm px-5 py-2.5 rounded-lg hover:shadow-md hover:brightness-110 active:scale-95 transition-all duration-150 cursor-pointer"
-                id="header-register-btn"
-              >
-                Register
-              </button>
+              >Login</button>
+              {showRegister && (
+                <button
+                  onClick={() => navigate('/register')}
+                  className="bg-brand-primary text-white font-semibold text-sm px-5 py-2.5 rounded-lg hover:shadow-md hover:brightness-110 active:scale-95 transition-all duration-150 cursor-pointer"
+                  id="header-register-btn"
+                >Register</button>)}
             </>
           )}
         </div>
@@ -276,6 +295,23 @@ export default function Header({
               </>
             )}
 
+            {isLandlordDashboard && (
+              <>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); setCurrentTab?.('dashboard'); }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  Dashboard
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); setCurrentTab?.('properties'); }}
+                  className="text-left font-bold text-brand-dark hover:text-brand-primary py-1"
+                >
+                  Properties
+                </button>
+              </>
+            )}
+
             <hr className="border-brand-border/50" />
 
             {/* Mobile Auth Management Footer */}
@@ -305,13 +341,15 @@ export default function Header({
                 >
                   Login
                 </button>
-                <button
-                  onClick={() => { setMobileMenuOpen(false); navigate('/register'); }}
-                  className="w-full bg-brand-primary text-white font-bold text-sm py-2.5 rounded-lg text-center"
-                  id="mobile-register-btn"
-                >
-                  Register
-                </button>
+                {showRegister && (
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); navigate('/register'); }}
+                    className="w-full bg-brand-primary text-white font-bold text-sm py-2.5 rounded-lg text-center"
+                    id="mobile-register-btn"
+                  >
+                    Register
+                  </button>
+                )}
               </div>
             )}
           </div>

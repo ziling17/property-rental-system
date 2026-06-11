@@ -60,13 +60,13 @@ export default function PaymentSuccess({
         {/* Banner with Animated Success Badge */}
         <div className="bg-emerald-650 text-white p-8 text-center relative overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-700">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/10 to-transparent pointer-events-none" />
-          
+
           <div className="mx-auto h-16 w-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 border border-white/50 relative">
             <div className="p-3 bg-white text-emerald-600 rounded-full">
               <Check size={28} strokeWidth={3} />
             </div>
           </div>
-          
+
           <h1 className="font-sans text-2xl font-black tracking-tight mb-1">
             Payment Completed & Escrowed!
           </h1>
@@ -83,7 +83,7 @@ export default function PaymentSuccess({
               <h2 className="text-sm font-bold uppercase tracking-wider text-on-surface-variant flex items-center gap-1.5 border-b border-outline-variant/20 pb-2">
                 <ShieldCheck size={16} className="text-emerald-600" /> Transaction Summary
               </h2>
-              
+
               <div className="space-y-3 text-xs">
                 <div className="flex justify-between items-center text-on-surface">
                   <span className="text-on-surface-variant font-medium">Receipt Ref ID</span>
@@ -202,7 +202,7 @@ export default function PaymentSuccess({
                 Send Direct WhatsApp Chat
               </button>
             </div>
-            
+
             {messageToHost && (
               <div className="p-3 bg-white rounded-xl border border-outline-variant/20">
                 <p className="text-[11px] font-bold text-on-surface-variant/70 uppercase">Escrowed Draft Message:</p>
@@ -236,22 +236,13 @@ export default function PaymentSuccess({
               <button
                 onClick={() => setKeyHandoverTriggered(true)}
                 disabled={keyHandoverTriggered}
-                className={`px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 ${
-                  keyHandoverTriggered
+                className={`px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 ${keyHandoverTriggered
                     ? "bg-slate-100 text-slate-400 cursor-not-allowed"
                     : "bg-teal-50 border border-teal-200 text-teal-700 hover:bg-teal-100 cursor-pointer"
-                }`}
+                  }`}
               >
                 <Sparkles size={14} />
                 {keyHandoverTriggered ? "Key Handover Registered!" : "Register Handover ✔"}
-              </button>
-
-              <button
-                onClick={onReset}
-                className="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-opacity-95 cursor-pointer shadow-md transition-all flex items-center gap-1.5"
-              >
-                <Home size={14} />
-                Explore Properties
               </button>
             </div>
           </div>

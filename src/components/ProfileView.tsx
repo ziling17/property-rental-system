@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Pencil, 
-  Settings, 
-  Calendar, 
-  ShieldCheck, 
-  CreditCard, 
-  Shield, 
-  Star, 
-  Sparkles, 
-  Check, 
+import {
+  Pencil,
+  Settings,
+  Calendar,
+  ShieldCheck,
+  CreditCard,
+  Shield,
+  Star,
+  Sparkles,
+  Check,
   User
 } from 'lucide-react';
 import { Profile, RentalHistoryItem } from '../types';
@@ -36,7 +36,7 @@ export default function ProfileView({
 
   // Interactive rent payment simulator states
   const [simulationMsg, setSimulationMsg] = useState<string | null>(null);
-  
+
   // Synchronize aboutText if profile changes from external edit modal
   useEffect(() => {
     setAboutText(profile.aboutMe);
@@ -76,8 +76,8 @@ export default function ProfileView({
       const nextScore = Math.min(100, prev.trustScore + 2);
       const isUpgraded = nextScore > prev.trustScore;
       setSimulationMsg(
-        isUpgraded 
-          ? `🎉 Rent payment processed! Trust score increased by +2 (Current: ${nextScore}/100)` 
+        isUpgraded
+          ? `🎉 Rent payment processed! Trust score increased by +2 (Current: ${nextScore}/100)`
           : "🏆 Brilliant! You've achieved the perfect Trust Score of 100!"
       );
       return {
@@ -112,7 +112,7 @@ export default function ProfileView({
       {/* Simulation Banner Notice */}
       <AnimatePresence>
         {simulationMsg && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -130,14 +130,14 @@ export default function ProfileView({
           {/* Avatar Area */}
           <div className="relative group">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-slate-100 overflow-hidden shadow-xl bg-slate-50">
-              <img 
-                src={profile.avatarUrl} 
-                alt={profile.name} 
+              <img
+                src={profile.avatarUrl}
+                alt={profile.name}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
             </div>
-            <button 
+            <button
               onClick={onOpenEditModal}
               title="Edit Profile Image / Profile Information"
               className="absolute bottom-2 right-2 bg-blue-600 text-white p-2.5 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-transform cursor-pointer"
@@ -150,7 +150,7 @@ export default function ProfileView({
           <div className="text-center md:text-left">
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-1">{profile.name}</h1>
             <p className="text-lg text-slate-500 font-medium">{profile.email}</p>
-            
+
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mt-4">
               {profile.isVerifiedTenant && (
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold border border-blue-200 shadow-sm flex items-center gap-1">
@@ -170,14 +170,7 @@ export default function ProfileView({
 
         {/* Action Buttons */}
         <div className="flex flex-wrap justify-center gap-3 w-full md:w-auto">
-          <button 
-            onClick={onOpenSettingsModal}
-            className="flex items-center justify-center gap-2 px-5 py-2.5 border border-slate-200 rounded-xl text-blue-600 font-bold hover:bg-slate-50 active:scale-95 transition-all cursor-pointer bg-white shadow-sm w-full sm:w-auto text-[15px]"
-          >
-            <Settings className="w-4.5 h-4.5" />
-            Account Settings
-          </button>
-          <button 
+          <button
             onClick={onOpenEditModal}
             className="flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 active:scale-95 transition-all shadow-md hover:shadow-lg cursor-pointer w-full sm:w-auto text-[15px]"
           >
@@ -196,7 +189,7 @@ export default function ProfileView({
             About Me
           </h3>
           {!isEditingAbout ? (
-            <button 
+            <button
               onClick={() => setIsEditingAbout(true)}
               className="text-blue-600 font-bold text-sm flex items-center gap-1 hover:underline cursor-pointer"
             >
@@ -205,13 +198,13 @@ export default function ProfileView({
             </button>
           ) : (
             <div className="flex gap-2">
-              <button 
+              <button
                 onClick={() => setIsEditingAbout(false)}
                 className="text-slate-500 font-semibold text-sm hover:underline cursor-pointer"
               >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={handleSaveAbout}
                 className="bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-blue-700 cursor-pointer shadow-sm"
               >
@@ -261,7 +254,7 @@ export default function ProfileView({
 
       {/* Bento Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">
-        
+
         {/* Trust Score Card */}
         <div className="lg:col-span-4 bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col items-center justify-center relative overflow-hidden">
           <div className="absolute top-4 right-4">
@@ -270,7 +263,7 @@ export default function ProfileView({
               {trustLabel.text}
             </span>
           </div>
-          
+
           <h3 className="text-xl font-bold text-slate-800 mb-6 self-start flex items-center gap-2">
             Trust Score
           </h3>
@@ -332,7 +325,7 @@ export default function ProfileView({
         {/* Stats & Badge Section */}
         <div className="lg:col-span-8 flex flex-col gap-6">
           <div className="w-full">
-            
+
             {/* Months Active Stat */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center gap-5 hover:border-blue-100 transition-colors">
               <div className="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
@@ -360,13 +353,12 @@ export default function ProfileView({
 
             <div className="flex flex-wrap gap-3 mt-auto pt-2">
               {/* ID Verified Badge */}
-              <button 
+              <button
                 onClick={() => toggleBadge('idVerified')}
-                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border transition-all duration-200 cursor-pointer text-left focus:outline-none ${
-                  profile.idVerified 
-                    ? 'bg-white text-slate-800 border-blue-200 shadow-sm' 
+                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border transition-all duration-200 cursor-pointer text-left focus:outline-none ${profile.idVerified
+                    ? 'bg-white text-slate-800 border-blue-200 shadow-sm'
                     : 'bg-slate-100 border-slate-200 text-slate-400 grayscale opacity-80'
-                }`}
+                  }`}
               >
                 <ShieldCheck className={`w-5 h-5 shrink-0 ${profile.idVerified ? 'text-blue-600' : 'text-slate-400'}`} strokeWidth={2.2} />
                 <div>
@@ -381,13 +373,12 @@ export default function ProfileView({
               </button>
 
               {/* On-time Payer Badge */}
-              <button 
+              <button
                 onClick={() => toggleBadge('onTimePayer')}
-                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border transition-all duration-200 cursor-pointer text-left focus:outline-none ${
-                  profile.onTimePayer 
-                    ? 'bg-white text-slate-800 border-blue-200 shadow-sm' 
+                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border transition-all duration-200 cursor-pointer text-left focus:outline-none ${profile.onTimePayer
+                    ? 'bg-white text-slate-800 border-blue-200 shadow-sm'
                     : 'bg-slate-100 border-slate-200 text-slate-400 grayscale opacity-80'
-                }`}
+                  }`}
               >
                 <CreditCard className={`w-5 h-5 shrink-0 ${profile.onTimePayer ? 'text-blue-600' : 'text-slate-400'}`} strokeWidth={2.2} />
                 <div>
@@ -402,13 +393,12 @@ export default function ProfileView({
               </button>
 
               {/* Insurance Holder Badge */}
-              <button 
+              <button
                 onClick={() => toggleBadge('insuranceHolder')}
-                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border transition-all duration-200 cursor-pointer text-left focus:outline-none ${
-                  profile.insuranceHolder 
-                    ? 'bg-white text-slate-800 border-blue-200 shadow-sm' 
+                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl border transition-all duration-200 cursor-pointer text-left focus:outline-none ${profile.insuranceHolder
+                    ? 'bg-white text-slate-800 border-blue-200 shadow-sm'
                     : 'bg-slate-100 border-slate-200 text-slate-400 grayscale opacity-80'
-                }`}
+                  }`}
               >
                 <Shield className={`w-5 h-5 shrink-0 ${profile.insuranceHolder ? 'text-blue-600' : 'text-slate-400'}`} strokeWidth={2.2} />
                 <div>

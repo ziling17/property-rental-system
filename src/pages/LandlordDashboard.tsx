@@ -85,7 +85,6 @@ export default function LandlordDashboard() {
     const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
     const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
     const [isAccountSettingsOpen, setIsAccountSettingsOpen] = useState(false);
-    const [isAddPropertyOpenFromHeader, setIsAddPropertyOpenFromHeader] = useState(false);
 
     // Persist to localStorage
     const saveToStorage = (key: string, data: any) => {
@@ -218,36 +217,48 @@ export default function LandlordDashboard() {
     return (
         <div className="min-h-screen flex flex-col justify-between bg-slate-50/50">
             <Header
-                mode="auth"
                 onNavigate={() => navigate('/home')}
-                activeSection=""
+                activeSection={currentTab}
+                setCurrentTab={setCurrentTab}
                 userProfile={userProfile
                     ? { name: userProfile.name, score: 0, role: userProfile.role }
                     : null}
-                onOpenAuth={() => navigate('/login')}
-                onLogout={() => {
-                    localStorage.removeItem('mysewa_session');
-                    navigate('/login');
-                }}
             />
 
-            <main className="flex-grow pt-28 pb-16 px-6 md:px-16 max-w-7xl mx-auto w-full">
+            <main className="flex-grow pt-10 pb-16 px-6 md:px-16 max-w-7xl mx-auto w-full">
 
                 {currentTab === 'dashboard' && (
-                    <DashboardView
-                        profile={profile}
-                        properties={properties}
-                        leases={leases}
-                        payments={payments}
-                        inquiries={inquiries}
-                        onEditBioClick={() => setIsAccountSettingsOpen(true)}
-                        onAddPropertyClick={() => {
-                            setCurrentTab('properties');
-                            setIsAddPropertyOpenFromHeader(true);
-                        }}
-                        onAccountSettingsClick={() => setIsAccountSettingsOpen(true)}
-                        onOpenInquiry={handleOpenInquiry}
-                    />
+                    <>
+                        <div className="flex items-center justify-between mb-8 -mt-4">
+                            <button
+                                onClick={() => navigate('/home')}
+                                className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-brand-primary transition-colors cursor-pointer"
+                            >
+                                <span>←</span>
+                                <span>Back to Home</span>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem('mysewa_session');
+                                    navigate('/login');
+                                }}
+                                className="text-sm font-semibold text-red-500 hover:text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition-all cursor-pointer"
+                            >
+                                Log Out
+                            </button>
+                        </div>
+                        <DashboardView
+                            profile={profile}
+                            properties={properties}
+                            leases={leases}
+                            payments={payments}
+                            inquiries={inquiries}
+                            onEditBioClick={() => setIsAccountSettingsOpen(true)}
+                            onAddPropertyClick={() => navigate('/add-property')}
+                            onAccountSettingsClick={() => setIsAccountSettingsOpen(true)}
+                            onOpenInquiry={handleOpenInquiry}
+                        />
+                    </>
                 )}
 
                 {currentTab === 'properties' && (
@@ -256,8 +267,6 @@ export default function LandlordDashboard() {
                         onAddProperty={handleAddProperty}
                         onUpdateProperty={handleUpdateProperty}
                         onDeleteProperty={handleDeleteProperty}
-                        isAddModalOpenInitially={isAddPropertyOpenFromHeader}
-                        clearAddModalFlag={() => setIsAddPropertyOpenFromHeader(false)}
                     />
                 )}
 
@@ -286,10 +295,7 @@ export default function LandlordDashboard() {
 
             {/* Mobile FAB */}
             <button
-                onClick={() => {
-                    setCurrentTab('properties');
-                    setIsAddPropertyOpenFromHeader(true);
-                }}
+                onClick={() => navigate('/add-property')}
                 className="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center z-40 active:scale-95"
                 aria-label="Add Property"
             >

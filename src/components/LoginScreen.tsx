@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, Building2, ShieldAlert } from 'lucide-react';
 import { UserSession } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginScreenProps {
   onLoginSuccess: (session: UserSession) => void;
@@ -13,6 +14,7 @@ interface LoginScreenProps {
 }
 
 export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginScreenProps) {
+  const navigate = useNavigate();
   const [role, setRole] = useState<'tenant' | 'landlord'>('tenant');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,6 +73,16 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
     };
     localStorage.setItem("userProfile", JSON.stringify(session));
     onLoginSuccess(session);
+
+    onLoginSuccess(session);
+
+    const redirectTo = sessionStorage.getItem('redirect_after_login');
+    if (redirectTo) {
+      sessionStorage.removeItem('redirect_after_login');
+      navigate(redirectTo);
+    } else {
+      navigate(role === 'landlord' ? '/landlord-dashboard' : '/home');
+    }
   };
 
   const handleOAuthClick = (service: 'Google' | 'Facebook') => {
@@ -86,6 +98,20 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
         role: role, // inherit selected role tab
         name: name
       });
+
+      onLoginSuccess({
+        email: mockEmail,
+        role: role,
+        name: name
+      });
+
+      const redirectTo = sessionStorage.getItem('redirect_after_login');
+      if (redirectTo) {
+        sessionStorage.removeItem('redirect_after_login');
+        navigate(redirectTo);
+      } else {
+        navigate(role === 'landlord' ? '/landlord-dashboard' : '/home');
+      }
     }, 1200);
   };
 
@@ -112,8 +138,8 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
             type="button"
             onClick={() => { setRole('tenant'); setErrorStatus(null); }}
             className={`py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${role === 'tenant'
-                ? 'bg-white text-primary shadow-xs'
-                : 'text-on-surface-variant hover:text-on-surface'
+              ? 'bg-white text-primary shadow-xs'
+              : 'text-on-surface-variant hover:text-on-surface'
               }`}
             id="tenantTab"
           >
@@ -123,8 +149,8 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
             type="button"
             onClick={() => { setRole('landlord'); setErrorStatus(null); }}
             className={`py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${role === 'landlord'
-                ? 'bg-white text-primary shadow-xs'
-                : 'text-on-surface-variant hover:text-on-surface'
+              ? 'bg-white text-primary shadow-xs'
+              : 'text-on-surface-variant hover:text-on-surface'
               }`}
             id="landlordTab"
           >

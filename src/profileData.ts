@@ -7,7 +7,7 @@ export const INITIAL_PROFILE: Profile = {
   isVerifiedTenant: true,
   memberSinceYear: 2021,
   aboutMe: 'I am a professional working in the tech industry, looking for modern urban living spaces. I value clean, well-maintained properties and have a consistent track record of on-time payments and respectful tenancy. My preferred locations are close to public transit and green spaces.',
-  trustScore: 92,
+  trustScore: 80,
   monthsActive: 38,
   reviewsCount: 24,
   ratingValue: 4.8,

@@ -48,8 +48,8 @@ export default function PropertiesView({
 
   // Filter listings
   const filteredProperties = properties.filter((prop) => {
-    const matchesSearch = prop.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          prop.address.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = prop.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      prop.address.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = typeFilter === 'All' || prop.type === typeFilter;
     const matchesStatus = statusFilter === 'All' || prop.status === statusFilter;
     return matchesSearch && matchesType && matchesStatus;
@@ -187,14 +187,6 @@ export default function PropertiesView({
               <option value="Inactive">Inactive</option>
             </select>
           </div>
-
-          <button
-            id="prop-filter-add-btn"
-            onClick={handleOpenAddModal}
-            className="ml-auto md:ml-0 flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all shadow-xs cursor-pointer"
-          >
-            <Plus size={16} /> Add Property
-          </button>
         </div>
       </div>
 
@@ -217,10 +209,9 @@ export default function PropertiesView({
                 <span className="bg-white/95 text-slate-800 font-bold px-2.5 py-1 rounded-full text-xs shadow-xs uppercase tracking-wider">
                   {prop.type}
                 </span>
-                <span className={`px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-xs ${
-                  prop.status === 'Active' ? 'bg-emerald-600' :
+                <span className={`px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-xs ${prop.status === 'Active' ? 'bg-emerald-600' :
                   prop.status === 'Under Maintenance' ? 'bg-amber-500' : 'bg-red-500'
-                }`}>
+                  }`}>
                   {prop.status}
                 </span>
               </div>
@@ -257,7 +248,7 @@ export default function PropertiesView({
                 <div className="flex justify-between items-center bg-blue-50/30 p-2.5 rounded-xl border border-blue-50/20">
                   <div>
                     <span className="text-[10px] text-blue-500 font-bold uppercase tracking-wider block">Monthly Rent</span>
-                    <span className="text-lg font-extrabold text-blue-800">${prop.monthlyRent}</span>
+                    <span className="text-lg font-extrabold text-blue-800">RM {prop.monthlyRent}</span>
                   </div>
 
                   <div className="flex gap-1.5">
@@ -311,7 +302,7 @@ export default function PropertiesView({
                 <XCloseIcon />
               </button>
             </div>
-            
+
             <form onSubmit={handleAddSubmit} className="p-6 overflow-y-auto space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
@@ -476,7 +467,7 @@ export default function PropertiesView({
                 <XCloseIcon />
               </button>
             </div>
-            
+
             <form onSubmit={handleEditSubmit} className="p-6 overflow-y-auto space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
