@@ -72,21 +72,20 @@ export default function TenantDashboard() {
         localStorage.removeItem('mysewa_rental_history');
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('mysewa_session');
-        navigate('/login');
-    };
-
     return (
         <div className="bg-[#f8f9ff] text-slate-800 min-h-screen flex flex-col font-sans">
             <Header
+                mode="auth"
                 onNavigate={() => navigate('/home')}
                 activeSection=""
                 userProfile={userProfile ? { name: userProfile.name, score: 0, role: userProfile.role } : null}
+                onOpenAuth={() => navigate('/login')}
+                onLogout={() => {
+                    localStorage.removeItem('mysewa_session');
+                    navigate('/login');
+                }}
             />
-
             <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-16 py-10">
-
                 {/* Top action bar */}
                 <div className="flex items-center justify-between mb-8 -mt-4">
                     <button
@@ -97,13 +96,15 @@ export default function TenantDashboard() {
                         <span>Back to Home</span>
                     </button>
                     <button
-                        onClick={handleLogout}
+                        onClick={() => {
+                            localStorage.removeItem('mysewa_session');
+                            navigate('/login');
+                        }}
                         className="text-sm font-semibold text-red-500 hover:text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition-all cursor-pointer"
                     >
                         Log Out
                     </button>
                 </div>
-
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeTab}
@@ -139,9 +140,7 @@ export default function TenantDashboard() {
                     </motion.div>
                 </AnimatePresence>
             </main>
-
             <Footer onNavigate={() => { }} />
-
             <AnimatePresence>
                 {isEditOpen && (
                     <ProfileEditModal

@@ -29,8 +29,7 @@ export default function AccountSettingsModal({
     onSaveProfile({
       name,
       email,
-      avatarUrl,
-      bio,
+      avatarUrl: avatarUrl?.trim() || null,
       membershipYear,
       isVerified
     });
@@ -46,15 +45,15 @@ export default function AccountSettingsModal({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/40 backdrop-blur-sm flex justify-center items-center p-4">
-      <div 
+      <div
         id="account-settings-modal-content"
         className="bg-white rounded-2xl shadow-xl border border-gray-100 max-w-lg w-full flex flex-col"
       >
         <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50 rounded-t-2xl">
           <h3 className="font-bold text-gray-900 text-lg">Account & Landlord Settings</h3>
-          <button 
+          <button
             id="close-account-modal-btn"
-            onClick={onClose} 
+            onClick={onClose}
             className="p-1 px-1.5 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
           >
             <X size={20} />
@@ -65,29 +64,34 @@ export default function AccountSettingsModal({
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Profile Image</label>
             <div className="flex items-center gap-4">
-              <img 
-                src={avatarUrl} 
-                alt="Sarah" 
-                className="w-16 h-16 rounded-full object-cover border-2 border-blue-600 shadow-sm"
-                referrerPolicy="no-referrer"
-              />
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt="Profile"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-blue-600 shadow-sm"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-full border-2 border-blue-600 bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xl">
+                  {name?.charAt(0).toUpperCase()}
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-2 flex-1">
                 {avatarsList.map((avatar, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setAvatarUrl(avatar.url)}
-                    className={`text-xs border text-left p-1.5 rounded-lg font-medium truncate hover:border-blue-500 hover:bg-blue-50/20 cursor-pointer ${
-                      avatarUrl === avatar.url ? 'border-blue-600 bg-blue-50/40 text-blue-700' : 'border-gray-200 text-gray-600'
-                    }`}
+                    className={`text-xs border text-left p-1.5 rounded-lg font-medium truncate hover:border-blue-500 hover:bg-blue-50/20 cursor-pointer ${avatarUrl === avatar.url ? 'border-blue-600 bg-blue-50/40 text-blue-700' : 'border-gray-200 text-gray-600'
+                      }`}
                   >
                     {avatar.name}
                   </button>
                 ))}
               </div>
             </div>
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={avatarUrl}
               onChange={(e) => setAvatarUrl(e.target.value)}
               className="mt-3 w-full text-xs text-gray-400 font-mono bg-gray-50 border border-gray-200 p-2 rounded-lg"

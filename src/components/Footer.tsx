@@ -7,15 +7,15 @@ import React from 'react';
 
 interface FooterProps {
   onSdgClick: () => void;
-  onLinkClick: (title: string, content: string) => void;
+  onLinkClick?: (title: string, content: string) => void;
 }
 
 export default function Footer({ onSdgClick, onLinkClick }: FooterProps) {
   const handleGenericLink = (e: React.MouseEvent, title: string) => {
     e.preventDefault();
     let content = '';
-    
-    switch(title) {
+
+    switch (title) {
       case 'Privacy':
         content = 'Your data privacy is secured with dual-signature hash matching under MySewa protocol guidelines. We never compromise on tenant-landlord direct contact logs.';
         break;
@@ -31,8 +31,8 @@ export default function Footer({ onSdgClick, onLinkClick }: FooterProps) {
       default:
         content = 'Standard MySewa platform information aligned with sector-level asset building and high-security compliance.';
     }
-    
-    onLinkClick(title, content);
+
+    onLinkClick?.(title, content);
   };
 
   return (
@@ -47,41 +47,41 @@ export default function Footer({ onSdgClick, onLinkClick }: FooterProps) {
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-6">
-          <a 
-            onClick={(e) => { e.preventDefault(); onSdgClick(); }} 
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium" 
+          <a
+            onClick={(e) => { e.preventDefault(); onSdgClick(); }}
+            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium"
             href="#sdg-portal"
             id="footer-link-about"
           >
             About SDG 9
           </a>
-          <a 
-            onClick={(e) => handleGenericLink(e, 'Privacy')} 
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium" 
+          <a
+            onClick={(e) => handleGenericLink(e, 'Privacy')}
+            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium"
             href="#"
             id="footer-link-privacy"
           >
             Privacy Policy
           </a>
-          <a 
-            onClick={(e) => handleGenericLink(e, 'Terms')} 
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium" 
+          <a
+            onClick={(e) => handleGenericLink(e, 'Terms')}
+            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium"
             href="#"
             id="footer-link-terms"
           >
             Terms of Use
           </a>
-          <a 
-            onClick={(e) => handleGenericLink(e, 'Contact')} 
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium" 
+          <a
+            onClick={(e) => handleGenericLink(e, 'Contact')}
+            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium"
             href="#"
             id="footer-link-contact"
           >
             Contact
           </a>
-          <a 
-            onClick={(e) => handleGenericLink(e, 'Social Media')} 
-            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium" 
+          <a
+            onClick={(e) => handleGenericLink(e, 'Social Media')}
+            className="text-xs text-on-surface-variant hover:text-primary transition-colors cursor-pointer font-medium"
             href="#"
             id="footer-link-social"
           >

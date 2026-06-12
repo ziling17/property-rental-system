@@ -35,7 +35,7 @@ export default function DashboardView({
   const occupancyPercentage = totalUnits > 0 ? ((totalOccupied / totalUnits) * 100).toFixed(1) : '0';
 
   // Calculate Monthly Revenue based on properties monthlyRent * occupied units
-  const calculatedMonthlyRevenue = (properties.reduce((acc, p) => 
+  const calculatedMonthlyRevenue = (properties.reduce((acc, p) =>
     p.status === 'Active' ? acc + (p.monthlyRent * (p.occupiedUnits || 1)) : acc, 0) / 1000
   ).toFixed(1);
 
@@ -54,12 +54,18 @@ export default function DashboardView({
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="relative group cursor-pointer" onClick={onAccountSettingsClick}>
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-50 overflow-hidden shadow-xl hover:ring-4 hover:ring-blue-100 transition-all duration-300">
-              <img 
-                alt="Sarah Jenkins profile" 
-                className="w-full h-full object-cover" 
-                src={profile.avatarUrl}
-                referrerPolicy="no-referrer"
-              />
+              {profile.avatarUrl ? (
+                <img
+                  alt={profile.name}
+                  className="w-full h-full object-cover"
+                  src={profile.avatarUrl}
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-4xl">
+                  {profile.name?.charAt(0).toUpperCase()}
+                </div>
+              )}
             </div>
             <button className="absolute bottom-2 right-2 bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer">
               <Pencil size={18} />
@@ -81,7 +87,7 @@ export default function DashboardView({
           </div>
         </div>
         <div className="flex gap-3">
-          <button 
+          <button
             id="dash-settings-btn"
             onClick={onAccountSettingsClick}
             className="flex items-center gap-2 px-5 py-2.5 border border-gray-300 rounded-xl text-slate-700 font-semibold text-sm hover:bg-gray-50 transition-all active:scale-98 shadow-xs cursor-pointer"
@@ -89,7 +95,7 @@ export default function DashboardView({
             <Settings size={16} />
             Account Settings
           </button>
-          <button 
+          <button
             id="dash-add-property-btn"
             onClick={onAddPropertyClick}
             className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm shadow-md hover:bg-blue-700 hover:shadow-lg transition-all active:scale-98 cursor-pointer"
@@ -109,7 +115,7 @@ export default function DashboardView({
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-slate-950">About Me</h3>
               {!isEditingMiniBio ? (
-                <button 
+                <button
                   id="edit-bio-toggle-btn"
                   onClick={() => setIsEditingMiniBio(true)}
                   className="text-blue-600 font-semibold text-sm flex items-center gap-1.5 hover:underline cursor-pointer"
@@ -117,7 +123,7 @@ export default function DashboardView({
                   <Pencil size={15} /> Edit
                 </button>
               ) : (
-                <button 
+                <button
                   id="save-bio-toggle-btn"
                   onClick={handleSaveMiniBio}
                   className="bg-blue-50 text-blue-700 border border-blue-200 font-semibold text-xs py-1 px-3 rounded-lg flex items-center gap-1 hover:bg-blue-100 cursor-pointer"
@@ -126,7 +132,7 @@ export default function DashboardView({
                 </button>
               )}
             </div>
-            
+
             {!isEditingMiniBio ? (
               <p className="text-gray-500 text-sm leading-relaxed whitespace-pre-line">
                 {profile.bio}
@@ -230,8 +236,8 @@ export default function DashboardView({
           <div className="bg-blue-50/40 p-6 rounded-2xl space-y-6 border border-blue-100/50 flex-grow flex flex-col justify-between min-h-[420px]">
             <div className="space-y-6">
               {inquiries.map((inq) => (
-                <div 
-                  key={inq.id} 
+                <div
+                  key={inq.id}
                   className="pb-4 border-b border-blue-100/40 last:border-0 last:pb-0"
                 >
                   <div className="flex justify-between items-start mb-1">
@@ -245,7 +251,7 @@ export default function DashboardView({
                     <span className="px-2.5 py-1 bg-white border border-blue-100/50 rounded-xl text-xs font-semibold text-slate-800 shadow-3xs">
                       {inq.propertyName}
                     </span>
-                    <button 
+                    <button
                       id={`reply-btn-${inq.id}`}
                       onClick={() => onOpenInquiry(inq)}
                       className="text-blue-600 font-semibold text-xs hover:text-blue-700 flex items-center gap-1 cursor-pointer"
@@ -258,7 +264,7 @@ export default function DashboardView({
             </div>
 
             <div className="pt-4 border-t border-blue-100/40">
-              <button 
+              <button
                 id="manage-inquiries-btn"
                 onClick={() => onOpenInquiry(inquiries[0])}
                 className="w-full py-2.5 bg-white border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-blue-600 rounded-xl font-semibold text-sm transition-all shadow-xs cursor-pointer"

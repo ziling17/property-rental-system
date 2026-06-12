@@ -187,6 +187,14 @@ export default function PropertiesView({
               <option value="Inactive">Inactive</option>
             </select>
           </div>
+
+          <button
+            id="prop-filter-add-btn"
+            onClick={handleOpenAddModal}
+            className="ml-auto md:ml-0 flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all shadow-xs cursor-pointer"
+          >
+            <Plus size={16} /> Add Property
+          </button>
         </div>
       </div>
 
@@ -210,7 +218,7 @@ export default function PropertiesView({
                   {prop.type}
                 </span>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-xs ${prop.status === 'Active' ? 'bg-emerald-600' :
-                  prop.status === 'Under Maintenance' ? 'bg-amber-500' : 'bg-red-500'
+                    prop.status === 'Under Maintenance' ? 'bg-amber-500' : 'bg-red-500'
                   }`}>
                   {prop.status}
                 </span>
@@ -248,7 +256,7 @@ export default function PropertiesView({
                 <div className="flex justify-between items-center bg-blue-50/30 p-2.5 rounded-xl border border-blue-50/20">
                   <div>
                     <span className="text-[10px] text-blue-500 font-bold uppercase tracking-wider block">Monthly Rent</span>
-                    <span className="text-lg font-extrabold text-blue-800">RM {prop.monthlyRent}</span>
+                    <span className="text-lg font-extrabold text-blue-800">${prop.monthlyRent}</span>
                   </div>
 
                   <div className="flex gap-1.5">

@@ -13,7 +13,6 @@ export interface Property {
   amenities: string[];
   nearbySites: string[];
   type: 'condo' | 'apartment' | 'suite' | 'residence';
-  // New fields from HomeDashboard
   bedrooms?: number;
   bathrooms?: number;
   sqft?: number;
@@ -312,4 +311,79 @@ export interface PaymentTransaction {
   status: 'Paid' | 'Pending' | 'Overdue';
   paymentMethod?: string;
   invoiceNo: string;
+}
+
+// Add this to types.ts
+
+export type LeaseStatus = 'Active' | 'Pending' | 'Expired' | 'Terminated';
+export type PaymentStatus = 'Paid' | 'Pending' | 'Overdue';
+export type InquiryStatus = 'unread' | 'read' | 'replied';
+
+export interface LandlordProfile {
+  name: string;
+  email: string;
+  avatarUrl: string | null;
+  bio: string;
+  membershipYear: number;
+  isVerified: boolean;
+}
+
+export interface Property {
+  id: string;
+  name: string;
+  address: string;
+  type: string;
+  units: number;
+  occupiedUnits: number;
+  monthlyRent: number;
+  status: string;
+  image: string;
+  description: string;
+  amenities: string[];
+  yearBuilt: number;
+}
+
+export interface Lease {
+  id: string;
+  tenantName: string;
+  tenantEmail: string;
+  tenantPhone: string;
+  propertyId: string;
+  propertyName: string;
+  unitNumber: string;
+  startDate: string;
+  endDate: string;
+  monthlyRent: number;
+  securityDeposit: number;
+  status: LeaseStatus;
+}
+
+export interface Payment {
+  id: string;
+  tenantName: string;
+  propertyName: string;
+  amount: number;
+  date: string;
+  dueDate?: string;
+  status: PaymentStatus;
+  method: string;
+}
+
+export interface Inquiry {
+  id: string;
+  senderName: string;
+  senderEmail: string;
+  propertyName: string;
+  propertyId: string;
+  content: string;
+  timestamp: string;
+  status: InquiryStatus;
+  messages: ChatMessage[];
+}
+
+export interface ChatMessage {
+  id: string;
+  sender: 'tenant' | 'landlord';
+  text: string;
+  timestamp: string;
 }

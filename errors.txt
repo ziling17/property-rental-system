@@ -1,0 +1,430 @@
+src/AddPropertyData.ts(6,10): error TS2395: Individual declarations in merged declaration 'INITIAL_PROPERTIES' must be all exported or all local.
+src/AddPropertyData.ts(6,10): error TS2440: Import declaration conflicts with local declaration of 'INITIAL_PROPERTIES'.
+src/AddPropertyData.ts(6,30): error TS2395: Individual declarations in merged declaration 'INITIAL_LEASES' must be all exported or all local.
+src/AddPropertyData.ts(6,30): error TS2440: Import declaration conflicts with local declaration of 'INITIAL_LEASES'.
+src/AddPropertyData.ts(6,46): error TS2395: Individual declarations in merged declaration 'INITIAL_PAYMENTS' must be all exported or all local.
+src/AddPropertyData.ts(6,46): error TS2440: Import declaration conflicts with local declaration of 'INITIAL_PAYMENTS'.
+src/AddPropertyData.ts(6,64): error TS2395: Individual declarations in merged declaration 'INITIAL_NOTIFICATIONS' must be all exported or all local.
+src/AddPropertyData.ts(6,64): error TS2440: Import declaration conflicts with local declaration of 'INITIAL_NOTIFICATIONS'.
+src/AddPropertyData.ts(8,14): error TS2395: Individual declarations in merged declaration 'INITIAL_PROPERTIES' must be all exported or all local.
+src/AddPropertyData.ts(8,34): error TS2304: Cannot find name 'Property'.
+src/AddPropertyData.ts(101,14): error TS2395: Individual declarations in merged declaration 'INITIAL_LEASES' must be all exported or all local.
+src/AddPropertyData.ts(101,30): error TS2304: Cannot find name 'Lease'.
+src/AddPropertyData.ts(143,14): error TS2395: Individual declarations in merged declaration 'INITIAL_PAYMENTS' must be all exported or all local.
+src/AddPropertyData.ts(143,32): error TS2304: Cannot find name 'Payment'.
+src/AddPropertyData.ts(206,14): error TS2395: Individual declarations in merged declaration 'INITIAL_NOTIFICATIONS' must be all exported or all local.
+src/AddPropertyData.ts(208,9): error TS2353: Object literal may only specify known properties, and 'id' does not exist in type 'Notification'.
+src/AddPropertyData.ts(216,9): error TS2353: Object literal may only specify known properties, and 'id' does not exist in type 'Notification'.
+src/AddPropertyData.ts(224,9): error TS2353: Object literal may only specify known properties, and 'id' does not exist in type 'Notification'.
+src/components/AccountSettingsModal.tsx(3,10): error TS2305: Module '"../types"' has no exported member 'LandlordProfile'.
+src/components/BentoGrid.tsx(7,10): error TS2305: Module '"../types"' has no exported member 'MatchResult'.
+src/components/BookingCard.tsx(39,44): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/BookingCard.tsx(64,35): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/BookingCard.tsx(65,36): error TS2339: Property 'deposit' does not exist on type 'Property'.
+src/components/BookingCard.tsx(66,46): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/BookingCard.tsx(140,63): error TS2339: Property 'metrics' does not exist on type 'Property'.
+src/components/BookingCard.tsx(145,29): error TS2339: Property 'metrics' does not exist on type 'Property'.
+src/components/BookingCard.tsx(339,146): error TS2339: Property 'host' does not exist on type 'Property'.
+src/components/BookingCard.tsx(409,129): error TS2339: Property 'host' does not exist on type 'Property'.
+src/components/BookingPropertyCard.tsx(22,45): error TS2345: Argument of type 'BookingProperty' is not assignable to parameter of type 'Property'.
+  Type 'BookingProperty' is missing the following properties from type 'Property': city, price, sizeSqft, stabilityScore, and 5 more.
+src/components/BookingPropertyCard.tsx(44,35): error TS2339: Property 'imageUrl' does not exist on type 'Property'.
+src/components/BookingPropertyCard.tsx(49,34): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/BookingPropertyCard.tsx(67,75): error TS2339: Property 'rating' does not exist on type 'Property'.
+src/components/CardForm.tsx(8,10): error TS2305: Module '"../types"' has no exported member 'CardDetails'.
+src/components/CompareSection.tsx(6,20): error TS2305: Module '"../types"' has no exported member 'RenterProfile'.
+src/components/CompareSection.tsx(135,38): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/CompareSection.tsx(138,28): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/CompareSection.tsx(149,27): error TS2339: Property 'utilities' does not exist on type 'Property'.
+src/components/CompareSection.tsx(157,48): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/CompareSection.tsx(180,25): error TS2339: Property 'size' does not exist on type 'Property'.
+src/components/CompareSection.tsx(189,38): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/components/CompareSection.tsx(193,29): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/components/CompareSection.tsx(195,97): error TS2339: Property 'transitDistanceMinutes' does not exist on type 'Property'.
+src/components/CompareSection.tsx(243,33): error TS2339: Property 'landlordRating' does not exist on type 'Property'.
+src/components/CompareSection.tsx(244,94): error TS2339: Property 'landlordResponseTimeHours' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(7,20): error TS2305: Module '"../types"' has no exported member 'RenterProfile'.
+src/components/ExploreSection.tsx(32,32): error TS2339: Property 'address' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(41,18): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(41,27): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(44,18): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(44,27): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(47,18): error TS2339: Property 'landlordRating' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(47,37): error TS2339: Property 'landlordRating' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(160,86): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(164,31): error TS2339: Property 'address' does not exist on type 'Property'.
+src/components/ExploreSection.tsx(179,80): error TS2339: Property 'size' does not exist on type 'Property'.
+src/components/FpxSection.tsx(7,10): error TS2305: Module '"../types"' has no exported member 'Bank'.
+src/components/InquiryDetailModal.tsx(26,16): error TS2551: Property 'messages' does not exist on type 'Inquiry'. Did you mean 'message'?
+src/components/InquiryDetailModal.tsx(33,25): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(46,19): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(48,26): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(50,26): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(53,35): error TS2339: Property 'senderName' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(76,42): error TS2339: Property 'senderName' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(77,24): error TS2339: Property 'status' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(102,20): error TS2551: Property 'messages' does not exist on type 'Inquiry'. Did you mean 'message'?
+src/components/InquiryDetailModal.tsx(156,66): error TS2339: Property 'senderName' does not exist on type 'Inquiry'.
+src/components/InquiryDetailModal.tsx(175,88): error TS2339: Property 'senderEmail' does not exist on type 'Inquiry'.
+src/components/InteractiveMap.tsx(48,57): error TS2339: Property 'latitude' does not exist on type 'Property'.
+src/components/InteractiveMap.tsx(48,80): error TS2339: Property 'longitude' does not exist on type 'Property'.
+src/components/InteractiveMap.tsx(398,69): error TS2339: Property 'latitude' does not exist on type 'Property'.
+src/components/InteractiveMap.tsx(398,88): error TS2339: Property 'longitude' does not exist on type 'Property'.
+src/components/LandlordDashboardView.tsx(3,10): error TS2305: Module '"../types"' has no exported member 'LandlordProfile'.
+src/components/LandlordDashboardView.tsx(3,46): error TS2305: Module '"../types"' has no exported member 'Lease'.
+src/components/LandlordDashboardView.tsx(3,53): error TS2305: Module '"../types"' has no exported member 'Payment'.
+src/components/LandlordDashboardView.tsx(33,60): error TS2339: Property 'units' does not exist on type 'Property'.
+src/components/LandlordDashboardView.tsx(34,63): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/components/LandlordDashboardView.tsx(39,7): error TS2339: Property 'status' does not exist on type 'Property'.
+src/components/LandlordDashboardView.tsx(39,38): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/LandlordDashboardView.tsx(39,55): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/components/LandlordDashboardView.tsx(43,56): error TS2339: Property 'status' does not exist on type 'Inquiry'.
+src/components/LandlordDashboardView.tsx(234,28): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/components/LandlordDashboardView.tsx(238,79): error TS2339: Property 'senderName' does not exist on type 'Inquiry'.
+src/components/LandlordDashboardView.tsx(239,78): error TS2339: Property 'timestamp' does not exist on type 'Inquiry'.
+src/components/LandlordDashboardView.tsx(242,27): error TS2339: Property 'content' does not exist on type 'Inquiry'.
+src/components/LandlordDashboardView.tsx(249,44): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/components/LandlordLeasesView.tsx(3,10): error TS2305: Module '"../types"' has no exported member 'Lease'.
+src/components/LandlordLeasesView.tsx(3,17): error TS2305: Module '"../types"' has no exported member 'LeaseStatus'.
+src/components/LandlordLeasesView.tsx(48,33): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/LandlordLeasesView.tsx(49,37): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/LandlordPaymentsView.tsx(3,10): error TS2305: Module '"../types"' has no exported member 'Payment'.
+src/components/LandlordPaymentsView.tsx(3,19): error TS2305: Module '"../types"' has no exported member 'PaymentStatus'.
+src/components/LandlordPaymentsView.tsx(3,34): error TS2305: Module '"../types"' has no exported member 'PaymentMethod'.
+src/components/LandlordPaymentsView.tsx(57,28): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(3,20): error TS2724: '"../types"' has no exported member named 'PropertyType'. Did you mean 'Property'?
+src/components/LandlordPropertiesView.tsx(38,64): error TS2345: Argument of type '"Active"' is not assignable to parameter of type 'PropertyStatus | (() => PropertyStatus)'.
+src/components/LandlordPropertiesView.tsx(52,12): error TS2339: Property 'address' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(54,58): error TS2339: Property 'status' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(65,19): error TS2345: Argument of type '"Active"' is not assignable to parameter of type 'SetStateAction<PropertyStatus>'.
+src/components/LandlordPropertiesView.tsx(81,25): error TS2339: Property 'address' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(83,23): error TS2339: Property 'units' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(84,26): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(85,22): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(86,24): error TS2339: Property 'status' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(90,27): error TS2339: Property 'yearBuilt' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(102,7): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/components/LandlordPropertiesView.tsx(126,7): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/components/LandlordPropertiesView.tsx(212,106): error TS2339: Property 'status' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(213,24): error TS2339: Property 'status' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(215,25): error TS2339: Property 'status' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(228,25): error TS2339: Property 'address' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(240,78): error TS2339: Property 'units' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(244,77): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/components/LandlordPropertiesView.tsx(251,85): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/ListPropertyModal.tsx(132,11): error TS2740: Type '{ id: string; name: string; location: string; price: number; bedrooms: number; bathrooms: number; sqft: number; stabilityScore: number; image: string; description: string; landlordName: string; isVerified: boolean; ... 4 more ...; transitFriendly: boolean; }' is missing the following properties from type 'Property': city, beds, baths, sizeSqft, and 3 more.
+src/components/MapPropertyCard.tsx(37,25): error TS2339: Property 'imageUrl' does not exist on type 'Property'.
+src/components/MapPropertyCard.tsx(38,25): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/MapPropertyCard.tsx(52,21): error TS2339: Property 'matchScore' does not exist on type 'Property'.
+src/components/MapPropertyCard.tsx(55,44): error TS2339: Property 'matchScore' does not exist on type 'Property'.
+src/components/MapPropertyCard.tsx(85,23): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(78,25): error TS2339: Property 'area' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(104,33): error TS2339: Property 'imageUrl' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(105,33): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(117,29): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(172,37): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(173,37): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(176,31): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(185,33): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(189,92): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(196,31): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/MapPropertyDetailModal.tsx(286,77): error TS2339: Property 'landlord' does not exist on type 'Property'.
+src/components/Modals.tsx(440,69): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/PaymentSuccess.tsx(8,20): error TS2305: Module '"../types"' has no exported member 'CardDetails'.
+src/components/PaymentSuccess.tsx(33,25): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PaymentSuccess.tsx(34,39): error TS2339: Property 'securityDepositMultiplier' does not exist on type 'Property'.
+src/components/PaymentSuccess.tsx(35,38): error TS2339: Property 'utilityDepositMultiplier' does not exist on type 'Property'.
+src/components/PaymentSummary.tsx(21,34): error TS2339: Property 'monthlyRent' does not exist on type 'Property'.
+src/components/ProfileDrawer.tsx(6,10): error TS2305: Module '"../types"' has no exported member 'RenterProfile'.
+src/components/ProfileEditModal.tsx(4,10): error TS2305: Module '"../types"' has no exported member 'Profile'.
+src/components/ProfileView.tsx(15,10): error TS2305: Module '"../types"' has no exported member 'Profile'.
+src/components/ProfileView.tsx(15,19): error TS2305: Module '"../types"' has no exported member 'RentalHistoryItem'.
+src/components/PropertyDashboard.tsx(40,37): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(40,60): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(40,82): error TS2339: Property 'securityDepositMultiplier' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(40,117): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(40,139): error TS2339: Property 'utilityDepositMultiplier' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(65,37): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(84,47): error TS2339: Property 'securityDepositMultiplier' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(85,83): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(85,105): error TS2339: Property 'securityDepositMultiplier' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(88,46): error TS2339: Property 'utilityDepositMultiplier' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(89,83): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/PropertyDashboard.tsx(89,105): error TS2339: Property 'utilityDepositMultiplier' does not exist on type 'Property'.
+src/components/PropertyListingCard.tsx(30,27): error TS2339: Property 'badge' does not exist on type 'Property'.
+src/components/PropertyListingCard.tsx(47,25): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingCard.tsx(67,23): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(2,20): error TS2305: Module '"../types"' has no exported member 'Review'.
+src/components/PropertyListingDetailModal.tsx(2,28): error TS2305: Module '"../types"' has no exported member 'Transaction'.
+src/components/PropertyListingDetailModal.tsx(45,61): error TS2339: Property 'depositRequired' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(102,35): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(105,35): error TS2339: Property 'depositRequired' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(132,76): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(157,34): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(193,29): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(207,27): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(253,75): error TS2339: Property 'renewRate' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(257,78): error TS2339: Property 'contractSafety' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(265,28): error TS2339: Property 'details' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(358,60): error TS2339: Property 'reviews' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(361,31): error TS2339: Property 'reviews' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(367,35): error TS2339: Property 'reviews' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(688,93): error TS2339: Property 'depositRequired' does not exist on type 'Property'.
+src/components/PropertyListingDetailModal.tsx(700,49): error TS2339: Property 'depositRequired' does not exist on type 'Property'.
+src/components/PropertyViewer.tsx(6,20): error TS2305: Module '"../types"' has no exported member 'RenterProfile'.
+src/components/PropertyViewer.tsx(61,28): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/PropertyViewer.tsx(106,31): error TS2339: Property 'address' does not exist on type 'Property'.
+src/components/PropertyViewer.tsx(135,35): error TS2339: Property 'size' does not exist on type 'Property'.
+src/components/PropertyViewer.tsx(143,35): error TS2339: Property 'isLowTrafficZone' does not exist on type 'Property'.
+src/components/PropertyViewer.tsx(170,38): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/components/PropertyViewer.tsx(175,55): error TS2339: Property 'utilities' does not exist on type 'Property'.
+src/components/ReasoningSection.tsx(6,10): error TS2305: Module '"../types"' has no exported member 'MatchResult'.
+src/components/RentalSummary.tsx(7,20): error TS2305: Module '"../types"' has no exported member 'PaymentStatus'.
+src/components/RentalSummary.tsx(26,25): error TS2339: Property 'firstMonthRent' does not exist on type 'Property'.
+src/components/RentalSummary.tsx(27,39): error TS2339: Property 'securityDepositMultiplier' does not exist on type 'Property'.
+src/components/RentalSummary.tsx(28,38): error TS2339: Property 'utilityDepositMultiplier' does not exist on type 'Property'.
+src/components/RentalSummary.tsx(78,45): error TS2339: Property 'securityDepositMultiplier' does not exist on type 'Property'.
+src/components/RentalSummary.tsx(84,44): error TS2339: Property 'utilityDepositMultiplier' does not exist on type 'Property'.
+src/components/ReviewsList.tsx(7,10): error TS2305: Module '"../types"' has no exported member 'Review'.
+src/components/SearchView.tsx(19,20): error TS2305: Module '"../types"' has no exported member 'Profile'.
+src/components/SearchView.tsx(41,32): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/SearchView.tsx(66,41): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/SearchView.tsx(223,31): error TS2339: Property 'imageUrl' does not exist on type 'Property'.
+src/components/SearchView.tsx(224,31): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/SearchView.tsx(229,27): error TS2339: Property 'rating' does not exist on type 'Property'.
+src/components/SearchView.tsx(241,27): error TS2551: Property 'verified' does not exist on type 'Property'. Did you mean 'isVerified'?
+src/components/SearchView.tsx(257,29): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/SearchView.tsx(288,27): error TS2339: Property 'tags' does not exist on type 'Property'.
+src/components/SearchView.tsx(344,47): error TS2339: Property 'imageUrl' does not exist on type 'Property'.
+src/components/SearchView.tsx(345,47): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/SearchView.tsx(349,92): error TS2339: Property 'title' does not exist on type 'Property'.
+src/components/SettingsModal.tsx(4,10): error TS2305: Module '"../types"' has no exported member 'Profile'.
+src/components/SmartMatchHero.tsx(8,20): error TS2305: Module '"../types"' has no exported member 'MatchResult'.
+src/components/WalletSection.tsx(7,10): error TS2305: Module '"../types"' has no exported member 'Wallet'.
+src/landlordData.ts(15,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(43,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(59,5): error TS2322: Type '"Landed House"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(85,5): error TS2322: Type '"Landed House"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(103,5): error TS2353: Object literal may only specify known properties, and 'unit' does not exist in type 'Property'.
+src/landlordData.ts(127,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(145,5): error TS2322: Type '"Landed House"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(171,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(189,5): error TS2353: Object literal may only specify known properties, and 'unit' does not exist in type 'Property'.
+src/landlordData.ts(205,5): error TS2353: Object literal may only specify known properties, and 'unit' does not exist in type 'Property'.
+src/landlordData.ts(239,5): error TS2322: Type '"Landed House"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(265,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/landlordData.ts(380,3): error TS2305: Module '"./types"' has no exported member 'LandlordProfile'.
+src/landlordData.ts(380,20): error TS2305: Module '"./types"' has no exported member 'Lease'.
+src/landlordData.ts(380,27): error TS2305: Module '"./types"' has no exported member 'Payment'.
+src/landlordData.ts(450,5): error TS2353: Object literal may only specify known properties, and 'id' does not exist in type 'Inquiry'.
+src/lib/supabase.ts(4,17): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/supabase.ts(5,17): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/mapData.ts(19,5): error TS2322: Type '"Service Apartment"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/mapData.ts(54,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/mapData.ts(76,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/mapData.ts(123,5): error TS2322: Type '"Service Apartment"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/mapData.ts(157,5): error TS2322: Type '"Condominium"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/mapData.ts(178,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/mapData.ts(225,5): error TS2322: Type '"Penthouse"' is not assignable to type '"Condo" | "Apartment" | "Landed" | "Studio"'.
+src/mapData.ts(246,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/mockData.ts(6,20): error TS2305: Module '"./types"' has no exported member 'Tenant'.
+src/mockData.ts(6,28): error TS2305: Module '"./types"' has no exported member 'Invoice'.
+src/mockData.ts(6,37): error TS2305: Module '"./types"' has no exported member 'MaintenanceTicket'.
+src/mockData.ts(6,56): error TS2305: Module '"./types"' has no exported member 'Message'.
+src/mockData.ts(11,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/mockData.ts(24,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/mockData.ts(36,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/mockData.ts(49,5): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Property'.
+src/pages/AddProperty.tsx(28,20): error TS2305: Module '"../types"' has no exported member 'Lease'.
+src/pages/AddProperty.tsx(28,27): error TS2305: Module '"../types"' has no exported member 'Payment'.
+src/pages/AddProperty.tsx(28,36): error TS2305: Module '"../types"' has no exported member 'Notification'.
+src/pages/AddProperty.tsx(28,50): error TS2724: '"../types"' has no exported member named 'PropertyType'. Did you mean 'Property'?
+src/pages/AddProperty.tsx(29,93): error TS1261: Already included file name 'E:/UTHM/UTHM Y2S2/Creativity and Innovation/mysewa_v2/src/AddPropertyData.ts' differs from file name 'E:/UTHM/UTHM Y2S2/Creativity and Innovation/mysewa_v2/src/addPropertyData.ts' only in casing.
+  The file is in the program because:
+    Imported via "../AddPropertyData" from file 'E:/UTHM/UTHM Y2S2/Creativity and Innovation/mysewa_v2/src/pages/AddProperty.tsx'
+    Imported via "./AddPropertyData" from file 'E:/UTHM/UTHM Y2S2/Creativity and Innovation/mysewa_v2/src/AddPropertyData.ts'
+    Matched by default include pattern '**/*'
+src/pages/AddProperty.tsx(361,17): error TS2740: Type '{ bathroom: string[]; bedroomAndLaundry: string[]; entertainment: string[]; heatingAndCooling: string[]; homeSafety: string[]; internetAndOffice: string[]; kitchenAndDining: string[]; outdoor: string[]; parkingAndFacilities: string[]; services: string[]; }' is missing the following properties from type 'string[]': length, pop, push, concat, and 29 more.
+src/pages/AddProperty.tsx(373,42): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(477,40): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(483,39): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(494,40): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(496,34): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1224,65): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1236,63): error TS2551: Property 'images' does not exist on type 'Property'. Did you mean 'image'?
+src/pages/AddProperty.tsx(1237,63): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1240,164): error TS2339: Property 'status' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1242,59): error TS2339: Property 'status' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1247,107): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1260,157): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1279,109): error TS2339: Property 'size' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1287,119): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1544,65): error TS2551: Property 'images' does not exist on type 'Property'. Did you mean 'image'?
+src/pages/AddProperty.tsx(1544,83): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1547,131): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1552,121): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1553,121): error TS2339: Property 'status' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1555,60): error TS2339: Property 'status' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1616,66): error TS2551: Property 'images' does not exist on type 'Property'. Did you mean 'image'?
+src/pages/AddProperty.tsx(1616,105): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1625,93): error TS2339: Property 'status' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1632,115): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1650,128): error TS2339: Property 'size' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1657,131): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1661,129): error TS2339: Property 'securityDeposit' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1661,175): error TS2339: Property 'utilityDeposit' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1709,75): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1713,81): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1716,81): error TS2339: Property 'size' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1717,92): error TS2339: Property 'securityDeposit' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1718,91): error TS2339: Property 'utilityDeposit' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1719,45): error TS2740: Type 'string[]' is missing the following properties from type '{ bathroom: string[]; bedroomAndLaundry: string[]; entertainment: string[]; heatingAndCooling: string[]; homeSafety: string[]; internetAndOffice: string[]; kitchenAndDining: string[]; outdoor: string[]; parkingAndFacilities: string[]; services: string[]; }': bathroom, bedroomAndLaundry, entertainment, heatingAndCooling, and 6 more.
+src/pages/AddProperty.tsx(1720,76): error TS2551: Property 'images' does not exist on type 'Property'. Did you mean 'image'?
+src/pages/AddProperty.tsx(1776,80): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1776,94): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/AddProperty.tsx(1939,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/BookingPage.tsx(20,62): error TS2304: Cannot find name 'Property'.
+src/pages/BookingPage.tsx(118,45): error TS2304: Cannot find name 'Property'.
+src/pages/BookingPage.tsx(135,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: any; onOpenAuth: () => void | Promise<void>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/BookingPage.tsx(212,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/HomeDashboard.tsx(574,21): error TS2740: Type 'HomeProperty' is missing the following properties from type 'Property': city, beds, baths, sizeSqft, and 3 more.
+src/pages/HomeDashboard.tsx(586,21): error TS2322: Type '(newProperty: HomeProperty) => void' is not assignable to type '(property: Property) => void'.
+  Types of parameters 'newProperty' and 'property' are incompatible.
+    Type 'Property' is not assignable to type 'HomeProperty'.
+      Property 'bedrooms' is optional in type 'Property' but required in type 'HomeProperty'.
+src/pages/LandingPage.tsx(63,15): error TS2322: Type '{ mode: string; onNavigate: (sect: string) => void; activeSection: string; userProfile: any; onOpenAuth: () => void; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/LandingPage.tsx(135,15): error TS2322: Type '{ onNavigate: (sect: any) => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/LandlordDashboard.tsx(16,5): error TS2305: Module '"../types"' has no exported member 'LandlordProfile'.
+src/pages/LandlordDashboard.tsx(18,5): error TS2305: Module '"../types"' has no exported member 'Lease'.
+src/pages/LandlordDashboard.tsx(19,5): error TS2305: Module '"../types"' has no exported member 'Payment'.
+src/pages/LandlordDashboard.tsx(22,5): error TS2305: Module '"../types"' has no exported member 'InquiryStatus'.
+src/pages/LandlordDashboard.tsx(23,5): error TS2305: Module '"../types"' has no exported member 'LeaseStatus'.
+src/pages/LandlordDashboard.tsx(24,5): error TS2305: Module '"../types"' has no exported member 'PaymentStatus'.
+src/pages/LandlordDashboard.tsx(131,17): error TS2353: Object literal may only specify known properties, and 'occupiedUnits' does not exist in type 'Property'.
+src/pages/LandlordDashboard.tsx(131,48): error TS2339: Property 'units' does not exist on type 'Property'.
+src/pages/LandlordDashboard.tsx(131,62): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/pages/LandlordDashboard.tsx(146,25): error TS2353: Object literal may only specify known properties, and 'occupiedUnits' does not exist in type 'Property'.
+src/pages/LandlordDashboard.tsx(146,54): error TS2339: Property 'units' does not exist on type 'Property'.
+src/pages/LandlordDashboard.tsx(146,66): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/pages/LandlordDashboard.tsx(154,25): error TS2353: Object literal may only specify known properties, and 'occupiedUnits' does not exist in type 'Property'.
+src/pages/LandlordDashboard.tsx(154,57): error TS2339: Property 'occupiedUnits' does not exist on type 'Property'.
+src/pages/LandlordDashboard.tsx(188,21): error TS2339: Property 'status' does not exist on type 'Inquiry'.
+src/pages/LandlordDashboard.tsx(190,33): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/pages/LandlordDashboard.tsx(190,48): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/pages/LandlordDashboard.tsx(198,13): error TS2322: Type '"landlord"' is not assignable to type '"user" | "assistant"'.
+src/pages/LandlordDashboard.tsx(200,13): error TS2322: Type 'string' is not assignable to type 'Date'.
+src/pages/LandlordDashboard.tsx(203,21): error TS2339: Property 'id' does not exist on type 'Inquiry'.
+src/pages/LandlordDashboard.tsx(208,35): error TS2551: Property 'messages' does not exist on type 'Inquiry'. Did you mean 'message'?
+src/pages/LandlordDashboard.tsx(215,49): error TS2339: Property 'status' does not exist on type 'Inquiry'.
+src/pages/LandlordDashboard.tsx(265,22): error TS2739: Type '{ properties: Property[]; onAddProperty: (newProp: Property) => void; onUpdateProperty: (updated: Property) => void; onDeleteProperty: (id: string) => void; }' is missing the following properties from type 'PropertiesViewProps': isAddModalOpenInitially, clearAddModalFlag
+src/pages/LandlordDashboard.tsx(294,21): error TS2322: Type '{ onNavigate: () => void | Promise<void>; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/LoginPage.tsx(38,9): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: { name: string; score: number; role: "tenant" | "landlord"; }; onOpenAuth: () => string; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/LoginPage.tsx(53,15): error TS2322: Type '{ onRegisterSuccess: () => void; onNavigateToLogin: () => void; }' is not assignable to type 'IntrinsicAttributes'.
+  Property 'onRegisterSuccess' does not exist on type 'IntrinsicAttributes'.
+src/pages/MapPage.tsx(83,30): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/MapPage.tsx(84,30): error TS2339: Property 'area' does not exist on type 'Property'.
+src/pages/MapPage.tsx(152,94): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/MapPage.tsx(184,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: any; onOpenAuth: () => void | Promise<void>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/MapPage.tsx(468,50): error TS2552: Cannot find name 'PropertyCard'. Did you mean 'property'?
+src/pages/MapPage.tsx(506,75): error TS2339: Property 'imageUrl' does not exist on type 'Property'.
+src/pages/MapPage.tsx(507,75): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/MapPage.tsx(515,75): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/MapPage.tsx(517,122): error TS2339: Property 'area' does not exist on type 'Property'.
+src/pages/MapPage.tsx(581,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/MapPage.tsx(586,22): error TS2552: Cannot find name 'PropertyDetailModal'. Did you mean 'MapPropertyDetailModal'?
+src/pages/PaymentPage.tsx(20,33): error TS2305: Module '"../types"' has no exported member 'PaymentMethod'.
+src/pages/PaymentPage.tsx(20,48): error TS2305: Module '"../types"' has no exported member 'CardDetails'.
+src/pages/PaymentPage.tsx(20,61): error TS2305: Module '"../types"' has no exported member 'PaymentStatus'.
+src/pages/PaymentPage.tsx(161,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: { name: string; score: number; role: "tenant" | "landlord"; }; onOpenAuth: () => void | Promise<...>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/PaymentPage.tsx(311,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/PropertyDetailPage.tsx(107,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: any; onOpenAuth: () => void | Promise<void>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/PropertyDetailPage.tsx(232,29): error TS2740: Type 'DetailProperty' is missing the following properties from type 'Property': city, price, beds, baths, and 6 more.
+src/pages/PropertyDetailPage.tsx(242,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/PropertyListingPage.tsx(2,20): error TS2305: Module '"../types"' has no exported member 'Transaction'.
+src/pages/PropertyListingPage.tsx(107,34): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/PropertyListingPage.tsx(131,18): error TS2339: Property 'title' does not exist on type 'Property'.
+src/pages/PropertyListingPage.tsx(133,18): error TS2339: Property 'details' does not exist on type 'Property'.
+src/pages/PropertyListingPage.tsx(140,18): error TS2339: Property 'state' does not exist on type 'Property'.
+src/pages/PropertyListingPage.tsx(156,34): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/pages/PropertyListingPage.tsx(162,35): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+src/pages/PropertyListingPage.tsx(168,44): error TS2339: Property 'replace' does not exist on type 'number'.
+src/pages/PropertyListingPage.tsx(172,72): error TS2339: Property 'landlordVerified' does not exist on type 'Property'.
+src/pages/PropertyListingPage.tsx(175,37): error TS2339: Property 'depositRequired' does not exist on type 'Property'.
+src/pages/PropertyListingPage.tsx(229,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: any; onOpenAuth: () => void | Promise<void>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/PropertyListingPage.tsx(384,82): error TS2322: Type '{ className: string; title: string; }' is not assignable to type 'IntrinsicAttributes & Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>'.
+  Property 'title' does not exist on type 'IntrinsicAttributes & Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>'.
+src/pages/PropertyListingPage.tsx(678,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/RegisterPage.tsx(15,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: null; onOpenAuth: () => void; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/RentalHistory.tsx(313,17): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: { name: any; score: number; role: any; }; onOpenAuth: () => void | Promise<void>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/SmartMatchPage.tsx(17,20): error TS2305: Module '"../types"' has no exported member 'RenterProfile'.
+src/pages/SmartMatchPage.tsx(53,21): error TS2322: Type '{ mode: string; onNavigate: () => void | Promise<void>; activeSection: string; userProfile: any; onOpenAuth: () => void | Promise<void>; onLogout: () => void; }' is not assignable to type 'IntrinsicAttributes & HeaderProps'.
+  Property 'mode' does not exist on type 'IntrinsicAttributes & HeaderProps'.
+src/pages/SmartMatchPage.tsx(70,129): error TS2339: Property 'address' does not exist on type 'Property'.
+src/pages/SmartMatchPage.tsx(70,165): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/pages/SmartMatchPage.tsx(70,220): error TS2339: Property 'landlordRating' does not exist on type 'Property'.
+src/pages/SmartMatchPage.tsx(111,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/pages/TenantDashboard.tsx(11,10): error TS2305: Module '"../types"' has no exported member 'Profile'.
+src/pages/TenantDashboard.tsx(11,19): error TS2305: Module '"../types"' has no exported member 'RentalHistoryItem'.
+src/pages/TenantDashboard.tsx(135,33): error TS2322: Type '{ properties: Property[]; profile: Profile; onApplyForProperty: (propertyName: string) => void; }' is not assignable to type 'IntrinsicAttributes & BrowseProps'.
+  Property 'profile' does not exist on type 'IntrinsicAttributes & BrowseProps'.
+src/pages/TenantDashboard.tsx(143,21): error TS2322: Type '{ onNavigate: () => void; }' is not assignable to type 'IntrinsicAttributes & FooterProps'.
+  Property 'onNavigate' does not exist on type 'IntrinsicAttributes & FooterProps'.
+src/paymentData.ts(1,20): error TS2305: Module '"./types"' has no exported member 'Bank'.
+src/paymentData.ts(1,26): error TS2305: Module '"./types"' has no exported member 'Wallet'.
+src/paymentData.ts(8,9): error TS2353: Object literal may only specify known properties, and 'firstMonthRent' does not exist in type 'Property'.
+src/paymentData.ts(18,9): error TS2353: Object literal may only specify known properties, and 'firstMonthRent' does not exist in type 'Property'.
+src/paymentData.ts(28,9): error TS2353: Object literal may only specify known properties, and 'firstMonthRent' does not exist in type 'Property'.
+src/profileData.ts(1,10): error TS2305: Module '"./types"' has no exported member 'Profile'.
+src/profileData.ts(1,29): error TS2305: Module '"./types"' has no exported member 'RentalHistoryItem'.
+src/profileData.ts(51,5): error TS2820: Type '"Apartment"' is not assignable to type '"condo" | "apartment" | "suite" | "residence"'. Did you mean '"apartment"'?
+src/profileData.ts(70,5): error TS2322: Type '"Villa"' is not assignable to type '"condo" | "apartment" | "suite" | "residence"'.
+src/profileData.ts(89,5): error TS2820: Type '"Apartment"' is not assignable to type '"condo" | "apartment" | "suite" | "residence"'. Did you mean '"apartment"'?
+src/profileData.ts(108,5): error TS2820: Type '"Apartment"' is not assignable to type '"condo" | "apartment" | "suite" | "residence"'. Did you mean '"apartment"'?
+src/profileData.ts(127,5): error TS2322: Type '"Villa"' is not assignable to type '"condo" | "apartment" | "suite" | "residence"'.
+src/profileData.ts(146,5): error TS2820: Type '"Apartment"' is not assignable to type '"condo" | "apartment" | "suite" | "residence"'. Did you mean '"apartment"'?
+src/smartMatchData.ts(6,20): error TS2305: Module '"./types"' has no exported member 'RenterProfile'.
+src/smartMatchData.ts(6,35): error TS2305: Module '"./types"' has no exported member 'MatchResult'.
+src/smartMatchData.ts(25,5): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/smartMatchData.ts(44,5): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/smartMatchData.ts(63,5): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/smartMatchData.ts(82,5): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/smartMatchData.ts(101,5): error TS2353: Object literal may only specify known properties, and 'address' does not exist in type 'Property'.
+src/smartMatchData.ts(129,30): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(129,46): error TS2339: Property 'utilities' does not exist on type 'Property'.
+src/smartMatchData.ts(130,35): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(135,16): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(137,38): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(139,42): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(142,70): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(144,42): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(161,80): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(176,16): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(177,65): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(179,42): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(179,184): error TS2339: Property 'transitDistanceMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(181,36): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(183,45): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(186,88): error TS2339: Property 'commuteTimeMinutes' does not exist on type 'Property'.
+src/smartMatchData.ts(235,41): error TS2339: Property 'rent' does not exist on type 'Property'.
+src/smartMatchData.ts(245,18): error TS2339: Property 'isLowTrafficZone' does not exist on type 'Property'.
+src/smartMatchData.ts(257,85): error TS2339: Property 'landlordRating' does not exist on type 'Property'.
+src/smartMatchData.ts(257,164): error TS2339: Property 'landlordResponseTimeHours' does not exist on type 'Property'.
+src/smartMatchData.ts(260,98): error TS2339: Property 'landlordResponseTimeHours' does not exist on type 'Property'.

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Building2, Menu, X, CheckSquare } from 'lucide-react';
 
 interface HeaderProps {
+  mode?: string;
   onNavigate: (section: string) => void;
   activeSection: string;
   showRegister?: boolean;
@@ -12,6 +13,8 @@ interface HeaderProps {
     role: 'tenant' | 'landlord';
     score?: number;
   } | null;
+  onOpenAuth?: () => void;
+  onLogout?: () => void;
 }
 
 export default function Header({
@@ -77,7 +80,7 @@ export default function Header({
               className={`font-semibold text-[15px] pb-1 transition-all border-b-2 cursor-pointer ${activeSection === 'properties' ? 'text-brand-primary border-brand-primary' : 'text-brand-dark-text border-transparent hover:text-brand-primary hover:border-brand-primary/40'}`}
               id="nav-search-properties"
             >
-              Search Properties
+              Properties
             </button>
             <button
               onClick={() => { onNavigate('calculator'); document.getElementById('stability-calculator-section')?.scrollIntoView({ behavior: 'smooth' }); }}

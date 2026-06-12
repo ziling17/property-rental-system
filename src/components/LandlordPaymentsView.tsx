@@ -1,349 +1,619 @@
 import React, { useState } from 'react';
-import { Search, Plus, Calendar, DollarSign, Wallet, Check, AlertCircle, ArrowUpRight, Clock, Trash2, Tag, X } from 'lucide-react';
-import { Payment, PaymentStatus, PaymentMethod, Property } from '../types';
+import { Search, Plus, Filter, Key, Home, Trash2, Edit3, Settings, Calendar, ListFilter, Users, Check, MapPin } from 'lucide-react';
+import { Property, PropertyType, PropertyStatus } from '../types';
 
-interface PaymentsViewProps {
-  payments: Payment[];
+interface PropertiesViewProps {
   properties: Property[];
-  onAddPayment: (newPay: Payment) => void;
-  onUpdatePaymentStatus: (id: string, newStatus: PaymentStatus) => void;
-  onDeletePayment: (id: string) => void;
+  onAddProperty: (newProp: Property) => void;
+  onUpdateProperty: (updatedProp: Property) => void;
+  onDeleteProperty: (id: string) => void;
+  isAddModalOpenInitially: boolean;
+  clearAddModalFlag: () => void;
 }
 
-export default function PaymentsView({
-  payments,
+export default function PropertiesView({
   properties,
-  onAddPayment,
-  onUpdatePaymentStatus,
-  onDeletePayment
-}: PaymentsViewProps) {
+  onAddProperty,
+  onUpdateProperty,
+  onDeleteProperty,
+  isAddModalOpenInitially,
+  clearAddModalFlag
+}: PropertiesViewProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [typeFilter, setTypeFilter] = useState<string>('All');
   const [statusFilter, setStatusFilter] = useState<string>('All');
-  const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
+  const [selectedProp, setSelectedProp] = useState<Property | null>(null);
 
-  // Record Form States
-  const [tenantName, setTenantName] = useState('');
-  const [propertyName, setPropertyName] = useState('');
-  const [amount, setAmount] = useState<number>(0);
-  const [date, setDate] = useState('');
-  const [method, setMethod] = useState<PaymentMethod>('Direct Deposit');
-  const [status, setStatus] = useState<PaymentStatus>('Paid');
+  // Modal open states
+  const [isAddModalOpen, setIsAddModalOpen] = useState(isAddModalOpenInitially);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  // Edit/Add Form states
+  const [formName, setFormName] = useState('');
+  const [formAddress, setFormAddress] = useState('');
+  const [formType, setFormType] = useState<PropertyType>('Apartment');
+  const [formUnits, setFormUnits] = useState(1);
+  const [formOccupied, setFormOccupied] = useState(1);
+  const [formRent, setFormRent] = useState(1500);
+  const [formStatus, setFormStatus] = useState<PropertyStatus>('Active');
+  const [formImage, setFormImage] = useState('');
+  const [formDesc, setFormDesc] = useState('');
+  const [formAmenities, setFormAmenities] = useState('');
+  const [formYearBuilt, setFormYearBuilt] = useState(2020);
+
+  if (isAddModalOpenInitially && !isAddModalOpen) {
+    setIsAddModalOpen(true);
+    clearAddModalFlag();
+  }
 
   // Filter listings
-  const filteredPayments = payments.filter((pay) => {
-    const matchesSearch = pay.tenantName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          pay.propertyName.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'All' || pay.status === statusFilter;
-    return matchesSearch && matchesStatus;
+  const filteredProperties = properties.filter((prop) => {
+    const matchesSearch = prop.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      prop.address.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesType = typeFilter === 'All' || prop.type === typeFilter;
+    const matchesStatus = statusFilter === 'All' || prop.status === statusFilter;
+    return matchesSearch && matchesType && matchesStatus;
   });
 
-  // Calculate totals
-  const totalPaid = payments
-    .filter(p => p.status === 'Paid')
-    .reduce((sum, p) => sum + p.amount, 0);
-
-  const totalPending = payments
-    .filter(p => p.status === 'Pending')
-    .reduce((sum, p) => sum + p.amount, 0);
-
-  const totalOverdue = payments
-    .filter(p => p.status === 'Overdue')
-    .reduce((sum, p) => sum + p.amount, 0);
-
-  const handlePropertyChange = (selectedName: string) => {
-    setPropertyName(selectedName);
-    const linkedProp = properties.find(p => p.name === selectedName);
-    if (linkedProp) {
-      setAmount(linkedProp.monthlyRent);
-    }
+  const resetForm = () => {
+    setFormName('');
+    setFormAddress('');
+    setFormType('Apartment');
+    setFormUnits(1);
+    setFormOccupied(1);
+    setFormRent(1500);
+    setFormStatus('Active');
+    setFormImage('');
+    setFormDesc('');
+    setFormAmenities('');
+    setFormYearBuilt(2020);
   };
 
-  const handleRecordSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!tenantName || !propertyName || amount <= 0 || !date) return;
+  const handleOpenAddModal = () => {
+    resetForm();
+    // Pre-fill some pretty fallback image
+    setFormImage('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80');
+    setIsAddModalOpen(true);
+  };
 
-    const newPay: Payment = {
-      id: `pay-${Date.now()}`,
-      tenantName,
-      propertyName,
-      amount: Number(amount),
-      date,
-      status,
-      method
+  const handleOpenEditModal = (prop: Property) => {
+    setFormName(prop.name);
+    setFormAddress(prop.address);
+    setFormType(prop.type);
+    setFormUnits(prop.units);
+    setFormOccupied(prop.occupiedUnits);
+    setFormRent(prop.monthlyRent);
+    setFormStatus(prop.status);
+    setFormImage(prop.image);
+    setFormDesc(prop.description);
+    setFormAmenities(prop.amenities.join(', '));
+    setFormYearBuilt(prop.yearBuilt);
+    setIsEditModalOpen(true);
+    setSelectedProp(prop);
+  };
+
+  const handleAddSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formName || !formAddress) return;
+
+    const newProp: Property = {
+      id: `prop-${Date.now()}`,
+      name: formName,
+      address: formAddress,
+      type: formType,
+      units: Number(formUnits),
+      occupiedUnits: Number(formOccupied),
+      monthlyRent: Number(formRent),
+      status: formStatus,
+      image: formImage || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
+      description: formDesc || 'A gorgeous property registered on MySewa, located in prime sector with premium features.',
+      amenities: formAmenities ? formAmenities.split(',').map(a => a.trim()) : ['High Speed Wifi', 'Modern Kitchen'],
+      yearBuilt: Number(formYearBuilt)
     };
 
-    onAddPayment(newPay);
-    setIsRecordModalOpen(false);
+    onAddProperty(newProp);
+    setIsAddModalOpen(false);
+    resetForm();
+  };
 
-    // Reset fields
-    setTenantName('');
-    setPropertyName('');
-    setAmount(0);
-    setDate('');
-    setMethod('Direct Deposit');
-    setStatus('Paid');
+  const handleEditSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedProp || !formName || !formAddress) return;
+
+    const updated: Property = {
+      ...selectedProp,
+      name: formName,
+      address: formAddress,
+      type: formType,
+      units: Number(formUnits),
+      occupiedUnits: Number(formOccupied),
+      monthlyRent: Number(formRent),
+      status: formStatus,
+      image: formImage,
+      description: formDesc,
+      amenities: formAmenities ? formAmenities.split(',').map(a => a.trim()) : [],
+      yearBuilt: Number(formYearBuilt)
+    };
+
+    onUpdateProperty(updated);
+    setIsEditModalOpen(false);
+    setSelectedProp(null);
+    resetForm();
   };
 
   return (
     <div className="space-y-8">
-      {/* Financial Analytics summary bar */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Paid collections card */}
-        <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex items-center justify-between shadow-2xs">
-          <div>
-            <span className="text-xs text-emerald-700 font-bold uppercase tracking-wider block">Completed Rent Credits</span>
-            <span className="text-3xl font-extrabold text-emerald-800 mt-1">${totalPaid.toLocaleString()}</span>
-            <span className="text-xs text-emerald-600 block mt-1 font-medium">Month to date</span>
-          </div>
-          <span className="p-3.5 bg-emerald-100 text-emerald-700 rounded-xl">
-            <ArrowUpRight size={24} />
-          </span>
-        </div>
-
-        {/* Pending Collections card */}
-        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex items-center justify-between shadow-2xs">
-          <div>
-            <span className="text-xs text-amber-700 font-bold uppercase tracking-wider block">Outstanding Collections</span>
-            <span className="text-3xl font-extrabold text-amber-800 mt-1">${totalPending.toLocaleString()}</span>
-            <span className="text-xs text-amber-600 block mt-1 font-medium">Awaiting clearing</span>
-          </div>
-          <span className="p-3.5 bg-amber-100 text-amber-700 rounded-xl">
-            <Clock size={24} />
-          </span>
-        </div>
-
-        {/* Overdue Collections Card */}
-        <div className="bg-rose-50 border border-rose-100 rounded-2xl p-5 flex items-center justify-between shadow-2xs">
-          <div>
-            <span className="text-xs text-rose-700 font-bold uppercase tracking-wider block">Overdue Arrears</span>
-            <span className="text-3xl font-extrabold text-rose-800 mt-1">${totalOverdue.toLocaleString()}</span>
-            <span className="text-xs text-rose-600 block mt-1 font-medium">Alert issued</span>
-          </div>
-          <span className="p-3.5 bg-rose-100 text-rose-700 rounded-xl">
-            <AlertCircle size={24} />
-          </span>
-        </div>
-      </div>
-
-      {/* Filter toolbar */}
+      {/* Search and Filters Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-5 rounded-2xl border border-gray-100 shadow-3xs">
-        <div className="relative flex-1 w-full max-w-sm">
+        <div className="relative flex-1 w-full max-w-md">
           <Search size={18} className="absolute left-3.5 top-3 text-gray-400" />
           <input
-            id="payment-search-input"
+            id="property-search-input"
             type="text"
-            placeholder="Search payment logs by tenant or property..."
+            placeholder="Search properties by name or address..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full text-sm pl-11 pr-4 py-2.5 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
           />
         </div>
 
-        <div className="flex gap-2 w-full md:w-auto">
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs font-medium text-gray-600 bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl cursor-pointer hover:bg-gray-100 outline-none"
-          >
-            <option value="All">All statuses</option>
-            <option value="Paid">Cleared (Paid)</option>
-            <option value="Pending">Awaiting (Pending)</option>
-            <option value="Overdue">Overdue</option>
-          </select>
+        <div className="flex flex-wrap gap-2 w-full md:w-auto">
+          {/* Custom Select for Property Type */}
+          <div className="relative text-xs">
+            <select
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value)}
+              className="appearance-none font-medium text-gray-600 bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl cursor-pointer hover:bg-gray-100 outline-none"
+            >
+              <option value="All">All Types</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Suite">Suite</option>
+              <option value="Condo">Condo</option>
+              <option value="House">House</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div className="relative text-xs">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="appearance-none font-medium text-gray-600 bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl cursor-pointer hover:bg-gray-100 outline-none"
+            >
+              <option value="All">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Under Maintenance">Under Maintenance</option>
+              <option value="Vacant">Vacant</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
 
           <button
-            id="open-record-payment-btn"
-            onClick={() => setIsRecordModalOpen(true)}
+            id="prop-filter-add-btn"
+            onClick={handleOpenAddModal}
             className="ml-auto md:ml-0 flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all shadow-xs cursor-pointer"
           >
-            <Plus size={16} /> Record Rent
+            <Plus size={16} /> Add Property
           </button>
         </div>
       </div>
 
-      {/* Receipts Table List */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-3xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-50/70 border-b border-gray-100 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                <th className="py-4 px-6">Tenant Name</th>
-                <th className="py-4 px-6">Property</th>
-                <th className="py-4 px-6">Receipt Date</th>
-                <th className="py-4 px-6">Method</th>
-                <th className="py-4 px-6">Volume ($)</th>
-                <th className="py-4 px-6">Status</th>
-                <th className="py-4 px-6 text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50 text-sm focus:outline-none">
-              {filteredPayments.map((pay) => (
-                <tr key={pay.id} className="hover:bg-gray-50/50 transition-colors">
-                  <td className="py-4 px-6 font-semibold text-slate-900">{pay.tenantName}</td>
-                  <td className="py-4 px-6 font-medium text-gray-600">{pay.propertyName}</td>
-                  <td className="py-4 px-6 text-gray-500 font-mono text-xs">{pay.date}</td>
-                  <td className="py-4 px-6 text-gray-500 font-medium">
-                    <span className="bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs">
-                      {pay.method}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 font-extrabold text-slate-800">${pay.amount.toLocaleString()}</td>
-                  <td className="py-4 px-6">
-                    <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold shadow-3xs ${
-                      pay.status === 'Paid' ? 'bg-emerald-100 text-emerald-800' :
-                      pay.status === 'Pending' ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800'
-                    }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${
-                        pay.status === 'Paid' ? 'bg-emerald-500' :
-                        pay.status === 'Pending' ? 'bg-amber-500' : 'bg-red-500'
-                      }`} />
-                      {pay.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 text-center">
-                    <div className="flex justify-center items-center gap-2">
-                      {pay.status !== 'Paid' && (
-                        <button
-                          id={`mark-paid-btn-${pay.id}`}
-                          onClick={() => onUpdatePaymentStatus(pay.id, 'Paid')}
-                          className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 font-bold px-2 py-1 rounded-lg text-xs cursor-pointer"
-                        >
-                          Clear Payment
-                        </button>
-                      )}
-                      <button
-                        id={`delete-payment-${pay.id}`}
-                        onClick={() => onDeletePayment(pay.id)}
-                        className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                      >
-                        <Trash2 size={15} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {/* Properties Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredProperties.map((prop) => (
+          <div
+            key={prop.id}
+            className="group bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+          >
+            {/* Image container & Type badge */}
+            <div className="relative h-48 overflow-hidden">
+              <img
+                src={prop.image}
+                alt={prop.name}
+                className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute top-3 left-3 flex gap-1.5">
+                <span className="bg-white/95 text-slate-800 font-bold px-2.5 py-1 rounded-full text-xs shadow-xs uppercase tracking-wider">
+                  {prop.type}
+                </span>
+                <span className={`px-2.5 py-1 rounded-full text-xs font-bold text-white shadow-xs ${prop.status === 'Active' ? 'bg-emerald-600' :
+                    prop.status === 'Under Maintenance' ? 'bg-amber-500' : 'bg-red-500'
+                  }`}>
+                  {prop.status}
+                </span>
+              </div>
+            </div>
 
-        {filteredPayments.length === 0 && (
-          <div className="py-16 text-center">
-            <Wallet size={40} className="text-gray-300 mx-auto mb-3" />
-            <p className="text-gray-500 font-medium text-sm">No transaction statements match your selection.</p>
+            {/* General Info */}
+            <div className="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 className="font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                  {prop.name}
+                </h4>
+                <p className="text-xs text-gray-400 font-medium flex items-center gap-1 mt-1">
+                  <MapPin size={12} className="text-gray-400" />
+                  {prop.address}
+                </p>
+                <p className="text-sm text-gray-500 mt-3 line-clamp-2 leading-relaxed">
+                  {prop.description}
+                </p>
+              </div>
+
+              {/* Multi-unit display and pricing card */}
+              <div className="mt-5 border-t border-gray-50 pt-4">
+                <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-3.5">
+                  <div className="bg-gray-50/50 p-2 rounded-xl text-center">
+                    <span className="block font-medium text-gray-400">Total Units</span>
+                    <span className="text-sm font-bold text-slate-700">{prop.units}</span>
+                  </div>
+                  <div className="bg-gray-50/50 p-2 rounded-xl text-center">
+                    <span className="block font-medium text-gray-400">Occupied</span>
+                    <span className="text-sm font-bold text-blue-600">{prop.occupiedUnits}</span>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center bg-blue-50/30 p-2.5 rounded-xl border border-blue-50/20">
+                  <div>
+                    <span className="text-[10px] text-blue-500 font-bold uppercase tracking-wider block">Monthly Rent</span>
+                    <span className="text-lg font-extrabold text-blue-800">${prop.monthlyRent}</span>
+                  </div>
+
+                  <div className="flex gap-1.5">
+                    <button
+                      id={`edit-property-${prop.id}`}
+                      onClick={() => handleOpenEditModal(prop)}
+                      className="p-1.5 text-gray-400 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                      title="Edit details"
+                    >
+                      <Edit3 size={15} />
+                    </button>
+                    <button
+                      id={`delete-property-${prop.id}`}
+                      onClick={() => onDeleteProperty(prop.id)}
+                      className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                      title="Delete Property"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {filteredProperties.length === 0 && (
+          <div className="col-span-full py-16 text-center">
+            <Home size={40} className="text-gray-300 mx-auto mb-3" />
+            <p className="text-gray-500 font-medium text-sm">No properties found matching your selection.</p>
+            <button
+              onClick={() => { setSearchTerm(''); setTypeFilter('All'); setStatusFilter('All'); }}
+              className="text-blue-600 text-xs font-semibold mt-2 hover:underline cursor-pointer"
+            >
+              Reset filters
+            </button>
           </div>
         )}
       </div>
 
-      {/* Record Rent Modal */}
-      {isRecordModalOpen && (
+      {/* Property Slide-over Modal Form: Add Property */}
+      {isAddModalOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/40 backdrop-blur-sm flex justify-center items-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 max-w-md w-full flex flex-col">
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 max-w-xl w-full flex flex-col max-h-[90vh]">
             <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50 rounded-t-2xl">
-              <h3 className="font-bold text-gray-900 text-lg">Record Rent Payment</h3>
+              <h3 className="font-bold text-gray-900 text-lg">Add New Property to Portfolio</h3>
               <button
-                onClick={() => setIsRecordModalOpen(false)}
+                onClick={() => { setIsAddModalOpen(false); if (clearAddModalFlag) clearAddModalFlag(); }}
                 className="p-1 hover:bg-gray-100 rounded-lg text-gray-400 cursor-pointer"
               >
-                <X size={20} />
+                <XCloseIcon />
               </button>
             </div>
 
-            <form onSubmit={handleRecordSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleAddSubmit} className="p-6 overflow-y-auto space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Property Name</label>
+                  <input
+                    id="add-prop-name"
+                    type="text"
+                    required
+                    placeholder="e.g. Grandview Heights"
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Street Address</label>
+                  <input
+                    id="add-prop-address"
+                    type="text"
+                    required
+                    placeholder="e.g. 425 Skyview Terrace, Central District"
+                    value={formAddress}
+                    onChange={(e) => setFormAddress(e.target.value)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Property Type</label>
+                  <select
+                    value={formType}
+                    onChange={(e) => setFormType(e.target.value as PropertyType)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-100 outline-none cursor-pointer"
+                  >
+                    <option value="Apartment">Apartment</option>
+                    <option value="Suite">Suite</option>
+                    <option value="Condo">Condo</option>
+                    <option value="House">House</option>
+                    <option value="Commercial">Commercial</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Monthly Rent ($)</label>
+                  <input
+                    id="add-prop-rent"
+                    type="number"
+                    required
+                    value={formRent}
+                    onChange={(e) => setFormRent(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Total Units Count</label>
+                  <input
+                    id="add-prop-units"
+                    type="number"
+                    required
+                    value={formUnits}
+                    onChange={(e) => setFormUnits(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Occupied Units Count</label>
+                  <input
+                    type="number"
+                    required
+                    value={formOccupied}
+                    onChange={(e) => setFormOccupied(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Portfolio Status</label>
+                  <select
+                    value={formStatus}
+                    onChange={(e) => setFormStatus(e.target.value as PropertyStatus)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none cursor-pointer"
+                  >
+                    <option value="Active">Active</option>
+                    <option value="Under Maintenance">Under Maintenance</option>
+                    <option value="Vacant">Vacant</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Year Constructed</label>
+                  <input
+                    type="number"
+                    required
+                    value={formYearBuilt}
+                    onChange={(e) => setFormYearBuilt(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Tenant Name</label>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Image URL</label>
                 <input
-                  id="record-pay-tenant"
                   type="text"
-                  required
-                  placeholder="e.g. Elena Rodriguez"
-                  value={tenantName}
-                  onChange={(e) => setTenantName(e.target.value)}
+                  placeholder="Insert image hotlink address..."
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
                   className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Select Property</label>
-                <select
-                  required
-                  value={propertyName}
-                  onChange={(e) => handlePropertyChange(e.target.value)}
-                  className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none cursor-pointer"
-                >
-                  <option value="">-- Choose Property --</option>
-                  {properties.map(p => (
-                    <option key={p.id} value={p.name}>{p.name}</option>
-                  ))}
-                </select>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Amenities (separated by comma)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Gym, Parking, Pool, Air Conditioning"
+                  value={formAmenities}
+                  onChange={(e) => setFormAmenities(e.target.value)}
+                  className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Rent Amount ($)</label>
-                  <input
-                    id="record-pay-amount"
-                    type="number"
-                    required
-                    value={amount}
-                    onChange={(e) => setAmount(Number(e.target.value))}
-                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Statement Date</label>
-                  <input
-                    type="date"
-                    required
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Payment Method</label>
-                  <select
-                    value={method}
-                    onChange={(e) => setMethod(e.target.value as PaymentMethod)}
-                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none cursor-pointer"
-                  >
-                    <option value="Direct Deposit">Direct Deposit</option>
-                    <option value="Bank Transfer">Bank Transfer</option>
-                    <option value="Venmo">Venmo</option>
-                    <option value="Cash">Cash</option>
-                    <option value="Credit Card">Credit Card</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Status</label>
-                  <select
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value as PaymentStatus)}
-                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none cursor-pointer"
-                  >
-                    <option value="Paid">Paid / Cleared</option>
-                    <option value="Pending">Pending / Inbound</option>
-                    <option value="Overdue">Overdue / Arrears</option>
-                  </select>
-                </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Marketing Description</label>
+                <textarea
+                  value={formDesc}
+                  onChange={(e) => setFormDesc(e.target.value)}
+                  rows={3}
+                  className="w-full text-sm rounded-xl border border-gray-200 p-3 focus:border-blue-500 outline-none resize-none"
+                  placeholder="Describe the rooms, views, neighborhood, amenities..."
+                />
               </div>
 
               <div className="flex gap-2 justify-end pt-3">
                 <button
                   type="button"
-                  onClick={() => setIsRecordModalOpen(false)}
+                  onClick={() => { setIsAddModalOpen(false); if (clearAddModalFlag) clearAddModalFlag(); }}
                   className="px-4 py-2 border border-gray-200 text-gray-600 rounded-xl text-sm font-semibold hover:bg-gray-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
-                  id="record-pay-form-submit-btn"
+                  id="add-property-form-submit-btn"
                   type="submit"
                   className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold flex items-center gap-1 cursor-pointer"
                 >
-                  <Check size={16} /> Record payment
+                  <Plus size={16} /> Save Property
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Property Edit Slide-over Modal Form */}
+      {isEditModalOpen && selectedProp && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/40 backdrop-blur-sm flex justify-center items-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 max-w-xl w-full flex flex-col max-h-[90vh]">
+            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50 rounded-t-2xl">
+              <h3 className="font-bold text-gray-900 text-lg">Modify Property Details</h3>
+              <button
+                onClick={() => { setIsEditModalOpen(false); setSelectedProp(null); }}
+                className="p-1 hover:bg-gray-100 rounded-lg text-gray-400 cursor-pointer"
+              >
+                <XCloseIcon />
+              </button>
+            </div>
+
+            <form onSubmit={handleEditSubmit} className="p-6 overflow-y-auto space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Property Name</label>
+                  <input
+                    id="edit-prop-name"
+                    type="text"
+                    required
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Street Address</label>
+                  <input
+                    id="edit-prop-address"
+                    type="text"
+                    required
+                    value={formAddress}
+                    onChange={(e) => setFormAddress(e.target.value)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Property Type</label>
+                  <select
+                    value={formType}
+                    onChange={(e) => setFormType(e.target.value as PropertyType)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none cursor-pointer"
+                  >
+                    <option value="Apartment">Apartment</option>
+                    <option value="Suite">Suite</option>
+                    <option value="Condo">Condo</option>
+                    <option value="House">House</option>
+                    <option value="Commercial">Commercial</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Monthly Rent ($)</label>
+                  <input
+                    id="edit-prop-rent"
+                    type="number"
+                    required
+                    value={formRent}
+                    onChange={(e) => setFormRent(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Total Units Count</label>
+                  <input
+                    type="number"
+                    required
+                    value={formUnits}
+                    onChange={(e) => setFormUnits(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Occupied Units Count</label>
+                  <input
+                    type="number"
+                    required
+                    value={formOccupied}
+                    onChange={(e) => setFormOccupied(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Portfolio Status</label>
+                  <select
+                    value={formStatus}
+                    onChange={(e) => setFormStatus(e.target.value as PropertyStatus)}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none cursor-pointer"
+                  >
+                    <option value="Active">Active</option>
+                    <option value="Under Maintenance">Under Maintenance</option>
+                    <option value="Vacant">Vacant</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Year Constructed</label>
+                  <input
+                    type="number"
+                    required
+                    value={formYearBuilt}
+                    onChange={(e) => setFormYearBuilt(Number(e.target.value))}
+                    className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Image URL</label>
+                <input
+                  type="text"
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Amenities (separated by comma)</label>
+                <input
+                  type="text"
+                  value={formAmenities}
+                  onChange={(e) => setFormAmenities(e.target.value)}
+                  className="w-full text-sm rounded-xl border border-gray-200 p-2.5 focus:border-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1">Marketing Description</label>
+                <textarea
+                  value={formDesc}
+                  onChange={(e) => setFormDesc(e.target.value)}
+                  rows={3}
+                  className="w-full text-sm rounded-xl border border-gray-200 p-3 focus:border-blue-500 outline-none resize-none"
+                />
+              </div>
+
+              <div className="flex gap-2 justify-end pt-3">
+                <button
+                  type="button"
+                  onClick={() => { setIsEditModalOpen(false); setSelectedProp(null); }}
+                  className="px-4 py-2 border border-gray-200 text-gray-600 rounded-xl text-sm font-semibold hover:bg-gray-50 cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  id="save-edited-property-btn"
+                  type="submit"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-semibold flex items-center gap-1 cursor-pointer"
+                >
+                  <Check size={16} /> Save Changes
                 </button>
               </div>
             </form>
@@ -351,5 +621,13 @@ export default function PaymentsView({
         </div>
       )}
     </div>
+  );
+}
+
+function XCloseIcon() {
+  return (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
   );
 }

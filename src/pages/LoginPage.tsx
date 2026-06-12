@@ -36,11 +36,7 @@ export default function LoginPage() {
     <div className="bg-background text-on-background min-h-screen flex flex-col font-sans">
       <Header
         mode="auth"
-        onNavigate={() =>
-          session
-            ? navigate('/home')
-            : navigate('/')
-        }
+        onNavigate={() => window.location.href = '/home'}
         activeSection=""
         userProfile={session ? { name: session.name, score: 0, role: session.role } : null}
         onOpenAuth={() => window.location.href = '/login'}

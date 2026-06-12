@@ -270,25 +270,6 @@ export default function LandlordDashboard() {
                     />
                 )}
 
-                {currentTab === 'leases' && (
-                    <LeasesView
-                        leases={leases}
-                        properties={properties}
-                        onAddLease={handleAddLease}
-                        onUpdateLeaseStatus={handleUpdateLeaseStatus}
-                        onDeleteLease={handleDeleteLease}
-                    />
-                )}
-
-                {currentTab === 'payments' && (
-                    <PaymentsView
-                        payments={payments}
-                        properties={properties}
-                        onAddPayment={handleAddPayment}
-                        onUpdatePaymentStatus={handleUpdatePaymentStatus}
-                        onDeletePayment={handleDeletePayment}
-                    />
-                )}
             </main>
 
             <Footer onNavigate={() => navigate('/home')} />
