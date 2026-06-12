@@ -227,6 +227,7 @@ export default function LandlordDashboard() {
 
             <main className="flex-grow pt-10 pb-16 px-6 md:px-16 max-w-7xl mx-auto w-full">
 
+
                 {currentTab === 'dashboard' && (
                     <>
                         <div className="flex items-center justify-between mb-8 -mt-4">
