@@ -10,6 +10,7 @@ import LeasesView from '../components/LandlordLeasesView';
 import PaymentsView from '../components/LandlordPaymentsView';
 import InquiryDetailModal from '../components/InquiryDetailModal';
 import AccountSettingsModal from '../components/AccountSettingsModal';
+
 import { Plus } from 'lucide-react';
 
 import {

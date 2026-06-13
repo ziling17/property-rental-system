@@ -25,8 +25,13 @@ import {
     UploadCloud,
     AlertCircle
 } from "lucide-react";
-import { Property, Notification, PropertyType } from "../types";
-import { INITIAL_PROPERTIES, INITIAL_NOTIFICATIONS } from "../AddPropertyData";
+import { Property, Lease, Payment, Notification, PropertyType } from "../types";
+import {
+    INITIAL_PROPERTIES,
+    INITIAL_LEASES,
+    INITIAL_PAYMENTS,
+    INITIAL_NOTIFICATIONS
+} from "../AddPropertyData";
 
 export const AMENITY_CATEGORIES = [
     {
@@ -170,8 +175,26 @@ export default function AddProperty() {
         localStorage.setItem("mysewa_custom_amenities", JSON.stringify(customAmenities));
     }, [customAmenities]);
 
+
     const [activeAddCategory, setActiveAddCategory] = useState<string | null>(null);
     const [newAmenityText, setNewAmenityText] = useState("");
+    const [leases, setLeases] = useState<Lease[]>(() => {
+        const saved = localStorage.getItem("mysewa_leases");
+        return saved ? JSON.parse(saved) : [];
+    });
+
+    const [payments, setPayments] = useState<Payment[]>(() => {
+        const saved = localStorage.getItem("mysewa_payments");
+        return saved ? JSON.parse(saved) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("mysewa_leases", JSON.stringify(leases));
+    }, [leases]);
+
+    useEffect(() => {
+        localStorage.setItem("mysewa_payments", JSON.stringify(payments));
+    }, [payments]);
 
     const handleAddCustomAmenity = (catKey: string) => {
         const trimmed = newAmenityText.trim();
@@ -605,7 +628,7 @@ export default function AddProperty() {
                                 {/* Flow Progress Sidebar */}
                                 <aside className="lg:w-1/4">
                                     <div className="space-y-6 sticky top-28">
-                                        <h1 className="text-2xl font-bold tracking-tight text-on-surface">List a Property</h1>
+                                        <h1 className="text-2xl font-bold tracking-tight text-on-surface">Add a Property</h1>
 
                                         <div className="flex flex-col gap-3">
                                             {/* Step 1 Indicator */}
