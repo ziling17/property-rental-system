@@ -28,8 +28,8 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
   const handleDemoFill = (selectedRole: 'tenant' | 'landlord') => {
     setRole(selectedRole);
     if (selectedRole === 'tenant') {
-      setEmail('dingziling88@gmail.com');
-      setPassword('tenant1234');
+      setEmail('alex.thompson@example.com');
+      setPassword('alex1234');
     } else {
       setEmail('landlord@mysewa.io');
       setPassword('landlord1234');
@@ -212,7 +212,7 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
           <div id="form-group-email" className="space-y-1">
             <label htmlFor="login-email-input" className="text-xs font-semibold text-on-surface-variant flex justify-between items-center ml-1">
               <span>Email Address</span>
-              {email && email.toLowerCase() === 'dingziling88@gmail.com' && (
+              {email && email.toLowerCase() === 'alex.thompson@example.com' && (
                 <span className="text-[10px] bg-green-50 text-green-700 px-1.5 py-0.5 rounded font-mono font-bold">
                   Matched Tenant Account
                 </span>
