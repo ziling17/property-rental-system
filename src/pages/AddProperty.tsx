@@ -25,8 +25,8 @@ import {
     UploadCloud,
     AlertCircle
 } from "lucide-react";
-import { Property, Lease, Payment, Notification, PropertyType } from "../types";
-import { INITIAL_PROPERTIES, INITIAL_LEASES, INITIAL_PAYMENTS, INITIAL_NOTIFICATIONS } from "../AddPropertyData";
+import { Property, Notification, PropertyType } from "../types";
+import { INITIAL_PROPERTIES, INITIAL_NOTIFICATIONS } from "../AddPropertyData";
 
 export const AMENITY_CATEGORIES = [
     {
@@ -142,30 +142,12 @@ export default function AddProperty() {
         return saved ? JSON.parse(saved) : INITIAL_PROPERTIES;
     });
 
-    const [leases, setLeases] = useState<Lease[]>(() => {
-        const saved = localStorage.getItem("mysewa_leases");
-        return saved ? JSON.parse(saved) : INITIAL_LEASES;
-    });
-
-    const [payments, setPayments] = useState<Payment[]>(() => {
-        const saved = localStorage.getItem("mysewa_payments");
-        return saved ? JSON.parse(saved) : INITIAL_PAYMENTS;
-    });
-
     const [notifications, setNotifications] = useState<Notification[]>(INITIAL_NOTIFICATIONS);
 
     // Sync data to LocalStorage
     useEffect(() => {
         localStorage.setItem("mysewa_properties", JSON.stringify(properties));
     }, [properties]);
-
-    useEffect(() => {
-        localStorage.setItem("mysewa_leases", JSON.stringify(leases));
-    }, [leases]);
-
-    useEffect(() => {
-        localStorage.setItem("mysewa_payments", JSON.stringify(payments));
-    }, [payments]);
 
     // Custom Amenities states & helpers
     const [customAmenities, setCustomAmenities] = useState<Record<string, string[]>>(() => {
@@ -768,7 +750,8 @@ export default function AddProperty() {
                                                                         value={wizardData.location}
                                                                         onChange={e => setWizardData({ ...wizardData, location: e.target.value })}
                                                                         placeholder="Search address or area..."
-                                                                        className="w-full bg-surface border border-outline-variant rounded-xl p-4 pl-12 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                                                                        className="w-full bg-surface border border-outline-variant rounded-xl p-4 pl-12 focus:ring-2 
+                                                                                    focus:ring-primary/20 focus:border-primary outline-none transition-all"
                                                                     />
                                                                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-outline w-5 h-5" />
                                                                 </div>
@@ -946,47 +929,32 @@ export default function AddProperty() {
                                                                         <div className="mt-4 pt-3 border-t border-dashed border-slate-200">
                                                                             {activeAddCategory === category.key ? (
                                                                                 <div className="flex gap-1.5 items-center">
-                                                                                    <input
-                                                                                        type="text"
-                                                                                        placeholder="e.g. Jacuzzi"
-                                                                                        value={newAmenityText}
-                                                                                        onChange={(e) => setNewAmenityText(e.target.value)}
-                                                                                        className="flex-1 min-w-0 bg-white border border-outline-variant rounded-lg px-2 py-1 text-xs text-slate-800 outline-none focus:ring-1 focus:ring-primary focus:border-primary"
-                                                                                        autoFocus
-                                                                                        onKeyDown={(e) => {
+                                                                                    <input type="text" placeholder="e.g. Jacuzzi" value={newAmenityText} onChange={(e) => setNewAmenityText(e.target.value)} className="flex-1 min-w-0 bg-white border border-outline-variant rounded-lg px-2 py-1 text-xs text-slate-800  outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                                                                                        autoFocus onKeyDown={(e) => {
                                                                                             if (e.key === "Enter") {
                                                                                                 e.preventDefault();
                                                                                                 handleAddCustomAmenity(category.key);
                                                                                             }
                                                                                         }}
                                                                                     />
-                                                                                    <button
-                                                                                        type="button"
-                                                                                        onClick={() => handleAddCustomAmenity(category.key)}
-                                                                                        className="bg-primary text-white p-1 rounded-lg hover:bg-primary/90 transition-colors shrink-0"
-                                                                                        title="Add Amenity"
+                                                                                    <button type="button" onClick={() => handleAddCustomAmenity(category.key)} className="bg-primary text-white p-1 rounded-lg hover:bg-primary/90 transition-colors shrink-0" title="Add Amenity"
                                                                                     >
                                                                                         <Plus className="w-3.5 h-3.5" />
                                                                                     </button>
-                                                                                    <button
-                                                                                        type="button"
-                                                                                        onClick={() => {
-                                                                                            setActiveAddCategory(null);
-                                                                                            setNewAmenityText("");
-                                                                                        }}
-                                                                                        className="text-slate-400 hover:text-slate-600 p-1 rounded-lg shrink-0"
-                                                                                        title="Cancel"
+                                                                                    <button type="button" onClick={() => {
+                                                                                        setActiveAddCategory(null);
+                                                                                        setNewAmenityText("");
+                                                                                    }}
+                                                                                        className="text-slate-400 hover:text-slate-600 p-1 rounded-lg shrink-0" title="Cancel"
                                                                                     >
                                                                                         <X className="w-3.5 h-3.5" />
                                                                                     </button>
                                                                                 </div>
                                                                             ) : (
-                                                                                <button
-                                                                                    type="button"
-                                                                                    onClick={() => {
-                                                                                        setActiveAddCategory(category.key);
-                                                                                        setNewAmenityText("");
-                                                                                    }}
+                                                                                <button type="button" onClick={() => {
+                                                                                    setActiveAddCategory(category.key);
+                                                                                    setNewAmenityText("");
+                                                                                }}
                                                                                     className="text-primary hover:text-primary/85 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 hover:underline mt-1"
                                                                                 >
                                                                                     <Plus className="w-3.5 h-3.5" />

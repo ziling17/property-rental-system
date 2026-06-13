@@ -54,8 +54,8 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
     // Determine Name based on email
     let name = 'User';
     if (role === 'tenant') {
-      if (email.toLowerCase() === 'dingziling88@gmail.com') {
-        name = 'Ding Zi Ling';
+      if (email.toLowerCase() === 'alex.thompson@example.com') {
+        name = 'Alex Thompson';
       } else if (email.toLowerCase().includes('emily')) {
         name = 'Emily Vance';
       } else {
@@ -91,8 +91,8 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
     setTimeout(() => {
       setOauthLoading(null);
       // Simulate OAuth standard approval
-      const mockEmail = service === 'Google' ? 'dingziling88@gmail.com' : 'facebook.user@mysewa.io';
-      const name = service === 'Google' ? 'Ding Ziling' : 'Facebook User';
+      const mockEmail = service === 'Google' ? 'alex.thompson@example.com' : 'facebook.user@mysewa.io';
+      const name = service === 'Google' ? 'Alex' : 'Facebook User';
       onLoginSuccess({
         email: mockEmail,
         role: role, // inherit selected role tab
@@ -175,7 +175,7 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
               className="flex-1 py-1.5 px-2 bg-white hover:bg-surface-container-low text-[11px] font-semibold text-primary border border-outline-variant/30 rounded-lg transition-colors text-center"
               id="quick-demo-tenant-btn"
             >
-              As Tenant (Ding Ziling)
+              As Tenant
             </button>
             <button
               type="button"
@@ -183,7 +183,7 @@ export default function LoginScreen({ onLoginSuccess, onRegisterClick }: LoginSc
               className="flex-1 py-1.5 px-2 bg-white hover:bg-surface-container-low text-[11px] font-semibold text-primary border border-outline-variant/30 rounded-lg transition-colors text-center"
               id="quick-demo-landlord-btn"
             >
-              As Landlord (Admin)
+              As Landlord
             </button>
           </div>
         </div>
