@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Compass, Eye, EyeOff, User, Building } from 'lucide-react';
 import { UserRole } from '../types';
+import { registerUser } from '../utils/userStore';
 
 interface RegisterProps {
     onRegisterSuccess: (name: string, email: string, role: UserRole) => void;
@@ -37,35 +38,12 @@ export default function Register({ onRegisterSuccess, onNavigateToLogin }: Regis
             return;
         }
 
-        // Save registration mock state
-        const users = JSON.parse(localStorage.getItem('mysewa_users') || '[]');
-        const userExists = users.some((u: any) => u.email.toLowerCase() === email.toLowerCase());
-
-        if (userExists) {
-            setError('An account with this email already exists.');
+        const result = registerUser({ name, email: email.toLowerCase(), password, role });
+        if (!result.success) {
+            setError(result.message);
             return;
         }
 
-        const newUser = {
-            id: `user-${Date.now()}`,
-            name,
-            email: email.toLowerCase(),
-            role,
-            password,
-            createdAt: new Date().toISOString(),
-            trustScore: role === 'tenant' ? 95 : undefined,
-            verifications: role === 'tenant' ? {
-                identity: true,
-                employment: false,
-                income: false,
-                history: true
-            } : undefined
-        };
-
-        users.push(newUser);
-        localStorage.setItem('mysewa_users', JSON.stringify(users));
-
-        // Alert or proceed directly to login
         onRegisterSuccess(name, email, role);
     };
 

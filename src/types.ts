@@ -51,6 +51,7 @@ export interface UserSession {
   email: string;
   role: 'tenant' | 'landlord';
   name: string;
+  token: string;
 }
 
 
@@ -182,6 +183,7 @@ export interface BookingSummary {
   startDate: string;
   endDate: string;
   durationMonths: number;
+  durationDays: number;
   isValid: boolean;
   warnings: string[];
   firstMonthRent: number;

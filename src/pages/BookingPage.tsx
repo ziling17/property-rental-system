@@ -18,8 +18,14 @@ export default function BookingPage() {
     })();
     // Selection States
     const [selectedProperty, setSelectedProperty] = useState<Property>(PROPERTIES[0]);
-    const [startDate, setStartDate] = useState('2024-11-01');
-    const [endDate, setEndDate] = useState('2025-10-31');
+    const today = new Date();
+    const nextMonth = new Date(today);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+    const formatDate = (date: Date) => date.toISOString().split('T')[0];
+
+    const [startDate, setStartDate] = useState(formatDate(today));
+    const [endDate, setEndDate] = useState(formatDate(nextMonth));
     const [userEmail, setUserEmail] = useState<string | null>(null);
 
     // Modal display states
@@ -33,6 +39,7 @@ export default function BookingPage() {
                 startDate,
                 endDate,
                 durationMonths: 0,
+                durationDays: 0,
                 isValid: false,
                 warnings: ['Missing lease dates'],
                 firstMonthRent: 0,
@@ -44,6 +51,7 @@ export default function BookingPage() {
 
         const start = new Date(startDate);
         const end = new Date(endDate);
+
 
         if (isNaN(start.getTime()) || isNaN(end.getTime())) {
             return {
@@ -59,19 +67,18 @@ export default function BookingPage() {
             };
         }
 
-        // Precise inclusive calculation of rental duration
+
         let yearDiff = end.getFullYear() - start.getFullYear();
         let monthDiff = end.getMonth() - start.getMonth();
         let totalMonths = yearDiff * 12 + monthDiff;
 
-        // Add 1 to represent inclusive lease boundary (e.g., Nov 01 to Oct 31)
-        if (end.getDate() >= start.getDate() - 1) {
-            totalMonths += 1;
-        }
+        const adjustedMonths = end.getDate() >= start.getDate()
+            ? totalMonths
+            : Math.max(0, totalMonths - 1);
 
-        // Safety guard
-        const durationMonths = Math.max(0, totalMonths);
-        const isValid = durationMonths >= 6;
+        const durationMonths = Math.max(0, adjustedMonths);
+        const durationDays = Math.max(0, Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
+        const isValid = durationDays >= 30;
 
         const firstMonthRent = selectedProperty.monthlyRent;
         const securityDeposit = selectedProperty.securityDeposit;
@@ -82,8 +89,9 @@ export default function BookingPage() {
             startDate,
             endDate,
             durationMonths,
+            durationDays,
             isValid,
-            warnings: isValid ? [] : ['Lease duration must be 6 months or more'],
+            warnings: isValid ? [] : ['Lease duration must be at least 30 days'],
             firstMonthRent,
             securityDeposit,
             utilityDeposit,
@@ -168,6 +176,7 @@ export default function BookingPage() {
                             onStartDateChange={setStartDate}
                             onEndDateChange={setEndDate}
                             durationMonths={bookingSummary.durationMonths}
+                            durationDays={bookingSummary.durationDays}
                             isValid={bookingSummary.isValid}
                         />
 

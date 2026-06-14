@@ -1,21 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TrustBadges from '../components/TrustBadges';
 import LoginScreen from '../components/LoginScreen';
 import Sdg9Hub from '../components/SDG9Hub';
-import Register from './RegisterPage';
 import { UserSession } from '../types';
 import { useNavigate } from 'react-router-dom';
+import { validateSession } from '../utils/sessionUtils';
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
+  // ✅ useEffect MUST be here, before any return
   const [session, setSession] = useState<UserSession | null>(() => {
     const saved = localStorage.getItem('mysewa_session');
-    return saved ? JSON.parse(saved) : null;
+    if (!saved) return null;
+    const parsed: UserSession = JSON.parse(saved);
+    return validateSession(parsed) ? parsed : null;
   });
+
   const [showSdgHub, setShowSdgHub] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
+
+
+  // ✅ Moved up here — hooks cannot come after logic/returns
+  useEffect(() => {
+    const saved = localStorage.getItem('mysewa_session');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (!validateSession(parsed)) {
+        localStorage.removeItem('mysewa_session');
+      }
+    }
+  }, []);
 
   const handleLoginSuccess = (userSession: UserSession) => {
     setSession(userSession);
@@ -43,7 +59,6 @@ export default function LoginPage() {
         onLogout={handleLogout}
       />
       <main className="flex-grow flex flex-col items-center justify-center py-10 px-4 md:px-16 w-full max-w-screen-xl mx-auto">
-        {/* Back Button */}
         <div className="w-full mb-4">
           <button
             onClick={() => navigate('/')}
@@ -54,20 +69,13 @@ export default function LoginPage() {
           </button>
         </div>
         <div className="w-full flex flex-col items-center justify-center space-y-16 py-8">
-          {showRegister ? (
-            <Register
-              onRegisterSuccess={() => setShowRegister(false)}
-              onNavigateToLogin={() => setShowRegister(false)}
+          <>
+            <LoginScreen
+              onLoginSuccess={handleLoginSuccess}
+              onRegisterClick={() => navigate('/register')}
             />
-          ) : (
-            <>
-              <LoginScreen
-                onLoginSuccess={handleLoginSuccess}
-                onRegisterClick={() => setShowRegister(true)}
-              />
-              <TrustBadges />
-            </>
-          )}
+            <TrustBadges />
+          </>
         </div>
       </main>
       <Footer onSdgClick={() => setShowSdgHub(true)} onLinkClick={() => { }} />
